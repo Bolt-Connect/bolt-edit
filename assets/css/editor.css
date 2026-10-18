@@ -1,0 +1,585 @@
+.bolt-edit-ui,
+.bolt-edit-ui *,
+.bolt-edit-ui *::before,
+.bolt-edit-ui *::after {
+	box-sizing: border-box;
+}
+
+.bolt-edit-ui {
+	--bolt-edit-accent: #003399;
+	--bolt-edit-accent-hover: #002673;
+	--bolt-edit-border: #e3e0ed;
+	--bolt-edit-ink: #211a34;
+	--bolt-edit-body: #393151;
+	--bolt-edit-muted: #534b6a;
+	--bolt-edit-panel: #fdfcfe;
+	--bolt-edit-subtle: #f7f6fa;
+	--bolt-edit-focus: rgba(0, 51, 153, 0.18);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	letter-spacing: normal;
+	line-height: 1.4;
+	text-align: left;
+	text-transform: none;
+	cursor: auto;
+}
+
+html.bolt-edit-selection-active #wpadminbar {
+	cursor: auto;
+}
+
+.bolt-edit-toolbar {
+	position: fixed;
+	z-index: 2147483000;
+	right: auto;
+	bottom: 22px;
+	left: 50%;
+	display: flex;
+	align-items: center;
+	min-height: 40px;
+	padding: 0;
+	border: 1px solid rgba(83, 75, 106, 0.18);
+	border-radius: 999px;
+	background: rgba(253, 252, 254, 0.62);
+	box-shadow: 0 16px 38px rgba(33, 26, 52, 0.18), 0 2px 8px rgba(33, 26, 52, 0.08);
+	transform: translateX(-50%);
+	backdrop-filter: blur(16px);
+	transition: background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.bolt-edit-toolbar:hover,
+.bolt-edit-toolbar:focus-within {
+	background: rgba(253, 252, 254, 0.82);
+}
+
+.bolt-edit-toolbar:focus-within {
+	box-shadow: 0 16px 38px rgba(33, 26, 52, 0.18), 0 2px 8px rgba(33, 26, 52, 0.08), 0 0 0 3px var(--bolt-edit-focus);
+}
+
+.bolt-edit-ui[hidden],
+.bolt-edit-ui [hidden] {
+	display: none;
+}
+
+.bolt-edit-toolbar__select {
+	appearance: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	min-height: 40px;
+	margin: 0;
+	padding: 0 16px 0 14px;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	box-shadow: none;
+	color: var(--bolt-edit-ink);
+	cursor: pointer;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.bolt-edit-toolbar__select:hover,
+.bolt-edit-toolbar__select:focus-visible {
+	background: transparent;
+	outline: none;
+}
+
+.bolt-edit-client-logout{--bolt-edit-danger:#b42332;display:none;position:fixed;right:22px;bottom:22px;z-index:2147483000;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border:1px solid var(--bolt-edit-border);border-radius:999px;background:var(--bolt-edit-panel);color:var(--bolt-edit-danger);box-shadow:0 2px 8px rgba(33,26,52,.08);font:inherit;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap}
+html.bolt-edit-selection-active .bolt-edit-client-logout{display:inline-flex}
+.bolt-edit-client-logout:hover{background:var(--bolt-edit-subtle);color:var(--bolt-edit-danger)}
+.bolt-edit-client-logout:focus-visible{outline:2px solid var(--bolt-edit-danger);outline-offset:3px}
+@media(max-width:480px){.bolt-edit-client-logout{right:12px;bottom:76px}}
+
+.bolt-edit-toolbar__select:focus-visible {
+	box-shadow: none;
+}
+
+.bolt-edit-toolbar__select:disabled {
+	cursor: default;
+	opacity: 0.45;
+}
+
+.bolt-edit-toolbar__select .dashicons {
+	width: 16px;
+	height: 16px;
+	color: var(--bolt-edit-accent);
+	font-size: 16px;
+}
+
+html.bolt-edit-selection-active .bolt-edit-toolbar {
+	border-color: rgba(0, 51, 153, 0.5);
+	background: rgba(0, 51, 153, 0.2);
+	box-shadow: 0 16px 38px rgba(72, 35, 148, 0.28), 0 2px 8px rgba(33, 26, 52, 0.12);
+}
+
+html.bolt-edit-selection-active .bolt-edit-toolbar__select {
+	background: rgba(0, 51, 153, 0.88);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+	color: #fff;
+	backdrop-filter: blur(16px);
+}
+
+html.bolt-edit-selection-active .bolt-edit-toolbar__select:hover,
+html.bolt-edit-selection-active .bolt-edit-toolbar__select:focus-visible {
+	background: rgba(109, 40, 217, 0.94);
+}
+
+html.bolt-edit-selection-active .bolt-edit-toolbar__select .dashicons {
+	color: currentcolor;
+}
+
+html.bolt-edit-media-open .bolt-edit-toolbar,
+html.bolt-edit-media-open .bolt-edit-status,
+html.bolt-edit-media-open .bolt-edit-highlight,
+html.bolt-edit-media-open .bolt-edit-popup {
+	visibility: hidden;
+}
+
+/* Protect the frontend WordPress Media Library from common theme class collisions. */
+html.bolt-edit-media-open .media-modal .media-frame {
+	position: absolute !important;
+	inset: 0 !important;
+	width: auto !important;
+	height: auto !important;
+	max-width: none !important;
+	max-height: none !important;
+	overflow: hidden !important;
+	background: transparent !important;
+}
+
+.bolt-edit-status {
+	position: fixed;
+	z-index: 2147483001;
+	bottom: 72px;
+	left: 50%;
+	padding: 6px 10px;
+	border-radius: 999px;
+	background: rgba(33, 26, 52, 0.94);
+	box-shadow: 0 8px 24px rgba(33, 26, 52, 0.2);
+	color: var(--bolt-edit-panel);
+	font-size: 12px;
+	font-weight: 650;
+	transform: translateX(-50%);
+}
+
+.bolt-edit-highlight {
+	position: fixed;
+	z-index: 2147482998;
+	border: 2px solid var(--bolt-edit-accent);
+	border-radius: 4px;
+	pointer-events: none;
+	transition: inset 80ms ease, width 80ms ease, height 80ms ease;
+}
+
+.bolt-edit-highlight__label {
+	position: absolute;
+	top: -30px;
+	left: 0;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	max-width: min(420px, calc(100vw - 32px));
+	min-height: 28px;
+	padding: 4px 5px 4px 9px;
+	border-radius: 6px;
+	background: var(--bolt-edit-accent);
+	color: var(--bolt-edit-panel);
+	font-size: 12px;
+	font-weight: 650;
+	line-height: 18px;
+	white-space: nowrap;
+}
+
+.bolt-edit-highlight__text {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.bolt-edit-highlight__action {
+	flex: none;
+	min-height: 20px;
+	padding: 1px 8px;
+	border-radius: 999px;
+	background: var(--bolt-edit-panel);
+	color: var(--bolt-edit-accent-hover);
+	pointer-events: auto;
+	text-decoration: none;
+}
+
+.bolt-edit-highlight__action:hover,
+.bolt-edit-highlight__action:focus-visible {
+	background: var(--bolt-edit-subtle);
+	color: var(--bolt-edit-accent-hover);
+	outline: 2px solid var(--bolt-edit-panel);
+	outline-offset: 2px;
+}
+
+.bolt-edit-highlight--managed {
+	border-style: dashed;
+	border-color: var(--bolt-edit-muted);
+}
+
+.bolt-edit-highlight--managed .bolt-edit-highlight__label {
+	top: 0;
+	left: 0;
+	background: var(--bolt-edit-muted);
+}
+
+.bolt-edit-highlight--label-inside .bolt-edit-highlight__label {
+	top: 6px;
+	left: 6px;
+}
+
+/* Keep the pencil over page content, including layout containers and field children. */
+html.bolt-edit-selection-active:not(.bolt-edit-media-open) body,
+html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar)),
+html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar)) *,
+html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar))::before,
+html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar))::after,
+html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar)) *::before,
+html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar)) *::after {
+	cursor: url("../img/cursor.svg") 5 19, pointer !important;
+}
+
+html.bolt-edit-selection-active body [data-bolt-edit-managed],
+html.bolt-edit-selection-active body [data-bolt-edit-managed] *,
+html.bolt-edit-selection-active body [data-bolt-edit-managed]::before,
+html.bolt-edit-selection-active body [data-bolt-edit-managed]::after,
+html.bolt-edit-selection-active body [data-bolt-edit-managed] *::before,
+html.bolt-edit-selection-active body [data-bolt-edit-managed] *::after {
+	cursor: auto !important;
+}
+
+.bolt-edit-popup {
+	position: fixed;
+	z-index: 2147483001;
+	width: min(360px, calc(100vw - 32px));
+	padding: 18px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 14px;
+	background: var(--bolt-edit-panel);
+	box-shadow: 0 22px 55px rgba(33, 26, 52, 0.2), 0 4px 12px rgba(33, 26, 52, 0.08);
+	color: var(--bolt-edit-ink);
+}
+
+.bolt-edit-popup__label {
+	display: block;
+	margin: 0 0 10px;
+	color: var(--bolt-edit-ink);
+	font-size: 13px;
+	font-weight: 650;
+}
+
+.bolt-edit-popup__input {
+	appearance: none;
+	display: block;
+	width: 100%;
+	min-height: 42px;
+	max-height: 220px;
+	margin: 0;
+	padding: 10px 12px;
+	overflow-y: hidden;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+	background: var(--bolt-edit-panel);
+	box-shadow: none;
+	color: var(--bolt-edit-ink);
+	font: inherit;
+	line-height: 1.5;
+	resize: none;
+}
+
+.bolt-edit-popup__input:hover {
+	border-color: var(--bolt-edit-muted);
+}
+
+.bolt-edit-popup__input:focus {
+	border-color: var(--bolt-edit-accent);
+	box-shadow: 0 0 0 3px var(--bolt-edit-focus);
+	outline: none;
+}
+
+.bolt-edit-popup--wide {
+	width: min(440px, calc(100vw - 32px));
+}
+
+.bolt-edit-popup__toolbar {
+	display: flex;
+	gap: 2px;
+	margin: 0 0 8px;
+}
+
+.bolt-edit-popup__tool {
+	appearance: none;
+	display: inline-grid;
+	width: 32px;
+	height: 32px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	box-shadow: none;
+	color: var(--bolt-edit-muted);
+	cursor: pointer;
+	place-items: center;
+}
+
+.bolt-edit-popup__tool:hover {
+	background: var(--bolt-edit-subtle);
+	color: var(--bolt-edit-ink);
+}
+
+.bolt-edit-popup__tool[aria-pressed="true"] {
+	background: var(--bolt-edit-subtle);
+	color: var(--bolt-edit-accent-hover);
+}
+
+.bolt-edit-popup__tool:focus-visible {
+	box-shadow: 0 0 0 3px var(--bolt-edit-focus);
+	outline: none;
+}
+
+.bolt-edit-popup__tool .dashicons {
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+}
+
+.bolt-edit-popup__richtext {
+	min-height: 96px;
+	max-height: 280px;
+	padding: 10px 12px;
+	overflow-y: auto;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+	background: var(--bolt-edit-panel);
+	color: var(--bolt-edit-ink);
+	font-size: 14px;
+	line-height: 1.5;
+	overflow-wrap: anywhere;
+}
+
+.bolt-edit-popup__richtext:hover {
+	border-color: var(--bolt-edit-muted);
+}
+
+.bolt-edit-popup__richtext:focus {
+	border-color: var(--bolt-edit-accent);
+	box-shadow: 0 0 0 3px var(--bolt-edit-focus);
+	outline: none;
+}
+
+/* Reset theme typography inside the editor so it stays readable. */
+.bolt-edit-popup__richtext p,
+.bolt-edit-popup__richtext ul,
+.bolt-edit-popup__richtext ol {
+	margin: 0 0 0.6em;
+	padding: 0;
+	color: inherit;
+	font: inherit;
+}
+
+.bolt-edit-popup__richtext ul,
+.bolt-edit-popup__richtext ol {
+	padding-left: 1.4em;
+}
+
+.bolt-edit-popup__richtext ul {
+	list-style: disc;
+}
+
+.bolt-edit-popup__richtext ol {
+	list-style: decimal;
+}
+
+.bolt-edit-popup__richtext li {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+
+.bolt-edit-popup__richtext > :last-child {
+	margin-bottom: 0;
+}
+
+.bolt-edit-popup__richtext a {
+	color: var(--bolt-edit-accent-hover);
+	text-decoration: underline;
+}
+
+.bolt-edit-popup__link {
+	display: flex;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.bolt-edit-popup__link .bolt-edit-popup__input {
+	flex: 1;
+	min-width: 0;
+}
+
+.bolt-edit-popup__link .bolt-edit-popup__button {
+	height: 42px;
+}
+
+.bolt-edit-popup__button-editor {
+	display: grid;
+	gap: 12px;
+}
+
+.bolt-edit-popup__field {
+	display: grid;
+	gap: 5px;
+	margin: 0;
+}
+
+.bolt-edit-popup__field-label {
+	color: var(--bolt-edit-muted);
+	font-size: 11px;
+	font-weight: 650;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.bolt-edit-popup__image-editor {
+	display: grid;
+	gap: 10px;
+}
+
+.bolt-edit-popup__image-preview {
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 9px;
+	background: var(--bolt-edit-subtle);
+}
+
+.bolt-edit-popup__image-preview img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.bolt-edit-popup__replace {
+	appearance: none;
+	width: 100%;
+	height: 36px;
+	margin: 0;
+	padding: 0 14px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+	background: var(--bolt-edit-panel);
+	box-shadow: none;
+	color: var(--bolt-edit-ink);
+	cursor: pointer;
+	font: inherit;
+	font-weight: 600;
+}
+
+.bolt-edit-popup__replace:hover {
+	background: var(--bolt-edit-subtle);
+}
+
+.bolt-edit-popup__replace:focus-visible {
+	box-shadow: 0 0 0 3px var(--bolt-edit-focus);
+	outline: none;
+}
+
+.bolt-edit-popup__error {
+	margin: 8px 0 0;
+	color: #b42318;
+	font-size: 12px;
+}
+
+.bolt-edit-popup__actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.bolt-edit-popup__button {
+	appearance: none;
+	min-width: 72px;
+	height: 36px;
+	margin: 0;
+	padding: 0 14px;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	box-shadow: none;
+	cursor: pointer;
+	font: inherit;
+	font-weight: 600;
+}
+
+.bolt-edit-popup__button:focus-visible {
+	box-shadow: 0 0 0 3px var(--bolt-edit-focus);
+	outline: none;
+}
+
+.bolt-edit-popup__button:disabled {
+	cursor: wait;
+	opacity: 0.6;
+}
+
+.bolt-edit-popup__button--quiet {
+	border-color: var(--bolt-edit-border);
+	background: var(--bolt-edit-panel);
+	color: var(--bolt-edit-ink);
+}
+
+.bolt-edit-popup__button--quiet:hover {
+	background: var(--bolt-edit-subtle);
+}
+
+.bolt-edit-popup__button--primary {
+	background: var(--bolt-edit-accent);
+	color: var(--bolt-edit-panel);
+}
+
+.bolt-edit-popup__button--primary:hover {
+	background: var(--bolt-edit-accent-hover);
+}
+
+@media (max-width: 600px) {
+	.bolt-edit-toolbar {
+		bottom: 14px;
+	}
+
+	.bolt-edit-status {
+		bottom: 64px;
+	}
+
+	.bolt-edit-popup {
+		right: 12px !important;
+		bottom: 76px !important;
+		left: 12px !important;
+		width: auto;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bolt-edit-highlight,
+	.bolt-edit-toolbar {
+		transition: none;
+	}
+}
+
+/* v2: edit or leave private feedback in the existing popup. */
+.bolt-edit-popup{max-height:calc(100dvh - 32px);overflow:auto}
+.bolt-edit-popup__switch{display:flex;gap:4px;padding:4px;background:var(--bolt-edit-subtle);border-radius:8px;margin-bottom:14px}
+.bolt-edit-popup__switch button{appearance:none;flex:1;margin:0;border:0;padding:8px;border-radius:6px;background:transparent;color:var(--bolt-edit-muted);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.bolt-edit-popup__switch button[aria-selected="true"]{background:var(--bolt-edit-panel);color:var(--bolt-edit-accent);box-shadow:0 2px 8px var(--bolt-edit-focus)}
+.bolt-edit-popup__switch button:focus-visible{outline:2px solid var(--bolt-edit-accent);outline-offset:2px}.bolt-edit-popup__switch button:disabled{opacity:.5;cursor:default}
+.bolt-edit-popup__comment textarea{min-height:110px;resize:vertical}.bolt-edit-popup__hint{margin:10px 0;color:var(--bolt-edit-muted);font-size:12px;line-height:1.6}.bolt-edit-popup__note{white-space:pre-wrap;margin:12px 0;font-size:14px;line-height:1.6}.bolt-edit-popup__managed a{text-decoration:none;display:inline-flex;margin-bottom:10px}
+.bolt-edit-markers{position:fixed;inset:0;z-index:2147483000;pointer-events:none}
+.bolt-edit-comment-marker{appearance:none;position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;pointer-events:auto;width:30px;height:30px;padding:0;margin:0;border:2px solid var(--bolt-edit-panel);border-radius:50%;background:var(--bolt-edit-accent);color:var(--bolt-edit-panel);box-shadow:0 4px 12px var(--bolt-edit-focus);font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.bolt-edit-comment-marker:focus-visible{outline:3px solid var(--bolt-edit-accent);outline-offset:3px}html.bolt-edit-media-open .bolt-edit-markers{visibility:hidden}

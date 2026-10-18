@@ -1,0 +1,857 @@
+/*
+ * Bolt Edit - admin page.
+ *
+ * White top bar, WordPress default background, white cards,
+ * Bolt Connect blue accent (#003399).
+ */
+
+.bolt-edit-wrap {
+	--bolt-edit-accent: #003399;
+	--bolt-edit-accent-hover: #002673;
+	--bolt-edit-border: #e0e0e0;
+	--bolt-edit-ink: #1e1e1e;
+	--bolt-edit-body: #444;
+	--bolt-edit-muted: #666;
+	--bolt-edit-faint: #999;
+	--bolt-edit-subtle: #f6f6f7;
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+	color: var(--bolt-edit-body);
+}
+
+.bolt-edit-wrap *,
+.bolt-edit-wrap *::before,
+.bolt-edit-wrap *::after {
+	box-sizing: border-box;
+}
+
+.bolt-edit-wrap [hidden] {
+	display: none !important;
+}
+
+/* ── Header bar ── */
+.bolt-edit-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	background: #fff;
+	padding: 18px 28px;
+	margin-left: -20px;
+	border-bottom: 1px solid var(--bolt-edit-border);
+}
+
+.bolt-edit-header__left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.bolt-edit-header__icon {
+	display: block;
+	width: 32px;
+	height: 32px;
+	margin-block: -4px;
+	flex-shrink: 0;
+}
+
+.bolt-edit-header__title {
+	font-size: 18px;
+	line-height: 1.15;
+	font-weight: 600;
+	margin: 0;
+	padding: 0;
+	color: var(--bolt-edit-ink);
+}
+
+.bolt-edit-header__version {
+	font-size: 12px;
+	color: #888;
+	background: #f0f0f0;
+	padding: 2px 8px;
+	border-radius: 10px;
+}
+
+.bolt-edit-header__nav {
+	display: flex;
+	gap: 18px;
+	flex-wrap: wrap;
+}
+
+.bolt-edit-header__link {
+	text-decoration: none;
+	color: #555;
+	font-size: 13px;
+	font-weight: 500;
+	transition: color 0.15s;
+}
+
+.bolt-edit-header__link:hover,
+.bolt-edit-header__link:focus {
+	color: var(--bolt-edit-accent);
+	box-shadow: none;
+	outline: none;
+}
+
+.bolt-edit-header__link--active {
+	color: var(--bolt-edit-accent);
+	font-weight: 600;
+}
+
+.bolt-edit-header__open {
+	display: inline-flex;
+	align-items: center;
+	min-height: 32px;
+	margin: -6px 0;
+	padding: 0 14px;
+	border-radius: 6px;
+	background: var(--bolt-edit-accent);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+
+.bolt-edit-header__open:hover,
+.bolt-edit-header__open:focus {
+	background: var(--bolt-edit-accent-hover);
+	color: #fff;
+	box-shadow: none;
+	outline: none;
+}
+
+/* ── Content area ── */
+.bolt-edit-content {
+	max-width: 720px;
+	margin: 30px auto;
+	padding: 0 20px;
+}
+
+.bolt-edit-content--wide {
+	max-width: 1080px;
+}
+
+.bolt-edit-content--onboarding {
+	max-width: 980px;
+}
+
+.bolt-edit-card {
+	background: #fff;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+	padding: 36px 40px;
+	max-width: 620px;
+}
+
+.bolt-edit-card--full {
+	max-width: none;
+}
+
+.bolt-edit-card + .bolt-edit-card {
+	margin-top: 16px;
+}
+
+.bolt-edit-card h2 {
+	font-size: 24px;
+	font-weight: 600;
+	color: var(--bolt-edit-ink);
+	margin: 5px 0 8px;
+	padding: 0;
+	line-height: 1.25;
+}
+
+.bolt-edit-card h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--bolt-edit-ink);
+	margin: 22px 0 6px;
+}
+
+.bolt-edit-card p {
+	font-size: 14px;
+	line-height: 1.7;
+	color: var(--bolt-edit-body);
+	margin: 0 0 14px;
+}
+
+.bolt-edit-card p:last-child {
+	margin-bottom: 0;
+}
+
+.bolt-edit-card code {
+	font-size: 12.5px;
+	background: var(--bolt-edit-subtle);
+	padding: 1px 5px;
+	border-radius: 4px;
+}
+
+.bolt-edit-page-intro {
+	margin-bottom: 28px;
+}
+
+.bolt-edit-button {
+	display: inline-block;
+	margin-top: 8px;
+	padding: 10px 20px;
+	background: var(--bolt-edit-accent);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	border: 0;
+	border-radius: 6px;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.bolt-edit-button:hover,
+.bolt-edit-button:focus {
+	background: var(--bolt-edit-accent-hover);
+	color: #fff;
+	outline: none;
+}
+
+.bolt-edit-button--quiet {
+	background: #fff;
+	color: var(--bolt-edit-ink);
+	border: 1px solid var(--bolt-edit-border);
+}
+
+.bolt-edit-button--quiet:hover,
+.bolt-edit-button--quiet:focus {
+	background: var(--bolt-edit-subtle);
+	color: var(--bolt-edit-ink);
+}
+
+.bolt-edit-note {
+	padding: 14px 18px;
+	border: 1px solid #d8b4fe;
+	border-radius: 8px;
+	background: #faf5ff;
+	color: var(--bolt-edit-ink);
+	font-size: 13.5px;
+	line-height: 1.6;
+	margin: 0 0 24px;
+}
+
+.bolt-edit-note strong {
+	font-weight: 600;
+}
+
+.bolt-edit-changes .bolt-edit-admin__list {
+	padding-right: 0;
+	padding-left: 0;
+	border-width: 1px 0 0;
+	border-radius: 0;
+}
+
+.bolt-edit-admin__list {
+	margin: 0;
+	padding: 4px 24px;
+	list-style: none;
+	background: #fff;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+}
+
+.bolt-edit-admin__record {
+	padding: 16px 0;
+}
+
+.bolt-edit-admin__record-head,
+.bolt-edit-admin__change {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr);
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+}
+
+.bolt-edit-admin__record-head {
+	margin-bottom: 10px;
+}
+
+.bolt-edit-admin__record-col--after {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.bolt-edit-admin__field {
+	display: block;
+	color: var(--bolt-edit-ink);
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.bolt-edit-admin__meta-line {
+	margin: 0;
+	color: var(--bolt-edit-muted);
+	font-size: 12px;
+	line-height: 1.6;
+}
+
+.bolt-edit-admin__meta-line a {
+	color: var(--bolt-edit-accent);
+	text-decoration: none;
+}
+
+.bolt-edit-admin__meta-line a:hover {
+	text-decoration: underline;
+}
+
+.bolt-edit-admin__when,
+.bolt-edit-admin__muted {
+	color: var(--bolt-edit-muted);
+}
+
+.bolt-edit-admin__user {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.bolt-edit-admin__avatar {
+	border-radius: 50%;
+}
+
+.bolt-edit-admin__edit {
+	display: inline-flex;
+	min-height: 28px;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: center;
+	padding: 0 12px;
+	border: 1px solid var(--bolt-edit-accent);
+	border-radius: 6px;
+	color: var(--bolt-edit-accent);
+	font-size: 12px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.bolt-edit-admin__edit:hover,
+.bolt-edit-admin__edit:focus {
+	background: var(--bolt-edit-accent);
+	color: #fff;
+	text-decoration: none;
+	outline: none;
+	box-shadow: none;
+}
+
+.bolt-edit-admin__value-text {
+	align-self: stretch;
+	min-width: 0;
+	min-height: 42px;
+	padding: 10px 12px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 6px;
+	background: #fff;
+	font-size: 13px;
+	line-height: 1.5;
+	overflow-wrap: anywhere;
+	white-space: normal;
+}
+
+.bolt-edit-admin__value-text--rich p,
+.bolt-edit-admin__value-text--rich ul,
+.bolt-edit-admin__value-text--rich ol {
+	margin: 0 0 0.6em;
+	padding: 0;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.bolt-edit-admin__value-text--rich ul,
+.bolt-edit-admin__value-text--rich ol {
+	padding-left: 1.4em;
+}
+
+.bolt-edit-admin__value-text--rich ul {
+	list-style: disc;
+}
+
+.bolt-edit-admin__value-text--rich ol {
+	list-style: decimal;
+}
+
+.bolt-edit-admin__value-text--rich li {
+	margin: 0;
+}
+
+.bolt-edit-admin__value-text--rich > :last-child {
+	margin-bottom: 0;
+}
+
+.bolt-edit-admin__value-text--rich a {
+	color: var(--bolt-edit-accent);
+	text-decoration: underline;
+}
+
+.bolt-edit-admin__change .dashicons {
+	width: 22px;
+	height: 22px;
+	color: var(--bolt-edit-faint);
+	font-size: 22px;
+}
+
+.bolt-edit-admin__empty {
+	padding: 58px 24px;
+	border: 1px dashed var(--bolt-edit-border);
+	border-radius: 8px;
+	background: #fff;
+	text-align: center;
+}
+
+.bolt-edit-admin__empty > .dashicons {
+	width: 30px;
+	height: 30px;
+	margin-bottom: 10px;
+	color: var(--bolt-edit-faint);
+	font-size: 30px;
+}
+
+.bolt-edit-admin__empty h3 {
+	margin: 0 0 5px;
+	color: var(--bolt-edit-ink);
+	font-size: 14px;
+}
+
+.bolt-edit-admin__empty p {
+	margin: 0;
+	color: var(--bolt-edit-muted);
+	font-size: 13px;
+}
+
+/* ── Get started ── */
+.bolt-edit-get-started__intro {
+	max-width: 680px;
+	margin-bottom: 20px;
+}
+
+.bolt-edit-get-started__intro p,
+.bolt-edit-agent-instructions__intro p {
+	margin-bottom: 0;
+	color: var(--bolt-edit-muted);
+}
+
+.bolt-edit-eyebrow {
+	display: block;
+	color: var(--bolt-edit-accent);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.bolt-edit-subtabs {
+	display: inline-flex;
+	padding: 3px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+	background: var(--bolt-edit-subtle);
+	margin-bottom: 20px;
+}
+
+.bolt-edit-subtabs__btn {
+	appearance: none;
+	border: 0;
+	background: transparent;
+	padding: 7px 14px;
+	border-radius: 6px;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 500;
+	color: #555;
+	cursor: pointer;
+}
+
+.bolt-edit-subtabs__btn--active {
+	background: #fff;
+	color: var(--bolt-edit-ink);
+	font-weight: 600;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.bolt-edit-subtabs__btn:focus-visible {
+	outline: 2px solid var(--bolt-edit-accent);
+	outline-offset: 1px;
+}
+
+.bolt-edit-agent-tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 26px;
+}
+
+.bolt-edit-agent-tools__label {
+	margin-right: 2px;
+	color: var(--bolt-edit-faint);
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.bolt-edit-agent-tool {
+	display: inline-flex;
+	min-height: 30px;
+	align-items: center;
+	padding: 4px 10px;
+	border: 1px solid #e6dcfa;
+	border-radius: 999px;
+	background: #faf7ff;
+	color: #4f0b42;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.bolt-edit-paths {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+	margin: 0 0 32px;
+}
+
+.bolt-edit-path {
+	position: relative;
+	display: flex;
+	min-width: 0;
+	min-height: 282px;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 24px;
+	overflow: hidden;
+	border: 1px solid #dfd4f4;
+	border-radius: 12px;
+	background: linear-gradient(145deg, #fff 45%, #faf7ff 100%);
+}
+
+.bolt-edit-path::after {
+	position: absolute;
+	right: -38px;
+	bottom: -55px;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background: rgba(0, 51, 153, 0.055);
+	content: "";
+	pointer-events: none;
+}
+
+.bolt-edit-path__icon {
+	display: grid;
+	width: 38px;
+	height: 38px;
+	margin-bottom: 18px;
+	border-radius: 8px;
+	background: #4f0b42;
+	color: #fff;
+	place-items: center;
+}
+
+.bolt-edit-path__icon .dashicons {
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+}
+
+.bolt-edit-path__number {
+	color: var(--bolt-edit-accent);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+}
+
+.bolt-edit-card .bolt-edit-path h3 {
+	margin: 4px 0 7px;
+	font-size: 17px;
+	line-height: 1.3;
+}
+
+.bolt-edit-card .bolt-edit-path p {
+	margin: 0 0 18px;
+	color: var(--bolt-edit-muted);
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.bolt-edit-path .bolt-edit-button {
+	position: relative;
+	z-index: 1;
+	margin-top: auto;
+}
+
+.bolt-edit-copy-source {
+	position: fixed;
+	top: 0;
+	left: -10000px;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.bolt-edit-card .bolt-edit-section-heading {
+	margin: 0 0 22px;
+	font-size: 17px;
+	line-height: 1.3;
+}
+
+.bolt-edit-steps {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: bolt-edit-step;
+}
+
+.bolt-edit-steps li {
+	position: relative;
+	padding-left: 44px;
+	margin: 0 0 22px;
+	font-size: 14px;
+	line-height: 1.7;
+	counter-increment: bolt-edit-step;
+}
+
+.bolt-edit-steps li:last-child {
+	margin-bottom: 0;
+}
+
+.bolt-edit-steps li::before {
+	content: counter(bolt-edit-step);
+	position: absolute;
+	left: 0;
+	top: 1px;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background: var(--bolt-edit-accent);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	text-align: center;
+	line-height: 28px;
+}
+
+.bolt-edit-steps strong {
+	display: block;
+	color: var(--bolt-edit-ink);
+	font-weight: 600;
+}
+
+.bolt-edit-get-started__details {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 28px;
+	padding-top: 26px;
+	margin-top: 28px;
+	border-top: 1px solid var(--bolt-edit-border);
+}
+
+.bolt-edit-card .bolt-edit-get-started__details h3 {
+	margin: 0 0 6px;
+}
+
+.bolt-edit-card .bolt-edit-get-started__details p {
+	margin: 0;
+	color: var(--bolt-edit-muted);
+	font-size: 13px;
+	line-height: 1.65;
+}
+
+.bolt-edit-agent-instructions__intro {
+	margin-bottom: 20px;
+}
+
+.bolt-edit-instructions__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin: 0 0 14px;
+}
+
+.bolt-edit-instructions__actions .bolt-edit-button {
+	margin-top: 0;
+}
+
+.bolt-edit-instructions__path {
+	font-size: 12.5px;
+	color: var(--bolt-edit-muted);
+}
+
+.bolt-edit-instructions__text {
+	display: block;
+	width: 100%;
+	min-height: 420px;
+	padding: 14px 16px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 6px;
+	background: var(--bolt-edit-subtle);
+	color: var(--bolt-edit-ink);
+	font-family: Menlo, Consolas, monospace;
+	font-size: 12px;
+	line-height: 1.6;
+	resize: vertical;
+}
+
+.bolt-edit-instructions__text:focus {
+	border-color: var(--bolt-edit-accent);
+	box-shadow: 0 0 0 1px var(--bolt-edit-accent);
+	outline: none;
+}
+
+/* ── About ── */
+.bolt-edit-about__photo {
+	display: block;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 28px;
+}
+
+.bolt-edit-about p {
+	font-size: 16px;
+	line-height: 1.8;
+	margin: 0 0 18px;
+}
+
+.bolt-edit-about p:last-of-type {
+	margin-bottom: 0;
+}
+
+.bolt-edit-about__signature {
+	display: block;
+	margin-top: 28px;
+	width: 60px;
+	height: auto;
+}
+
+/* ── Changelog ── */
+.bolt-edit-changelog__ideas {
+	padding-bottom: 28px;
+	margin-bottom: 32px;
+	border-bottom: 1px solid var(--bolt-edit-border);
+}
+
+.bolt-edit-changelog__release + .bolt-edit-changelog__release {
+	margin-top: 28px;
+}
+
+.bolt-edit-changelog__release-header {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	margin-bottom: 14px;
+}
+
+.bolt-edit-changelog__version {
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--bolt-edit-ink);
+}
+
+.bolt-edit-changelog__date {
+	font-size: 13px;
+	color: var(--bolt-edit-faint);
+}
+
+.bolt-edit-changelog__list {
+	margin: 0;
+	padding-left: 20px;
+}
+
+.bolt-edit-changelog__list li {
+	font-size: 14px;
+	line-height: 1.6;
+	color: var(--bolt-edit-body);
+	margin-bottom: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 782px) {
+	.bolt-edit-header {
+		padding: 18px;
+		margin-left: -10px;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.bolt-edit-card {
+		padding: 24px 20px;
+	}
+
+	.bolt-edit-admin__list {
+		padding: 4px 16px;
+	}
+
+	.bolt-edit-admin__record-head,
+	.bolt-edit-admin__change {
+		grid-template-columns: 1fr;
+	}
+
+	.bolt-edit-admin__record-gutter {
+		display: none;
+	}
+
+	.bolt-edit-admin__record-col--after {
+		margin-top: 8px;
+	}
+
+	.bolt-edit-admin__change .dashicons {
+		margin: 0 auto;
+		transform: rotate(90deg);
+	}
+
+	.bolt-edit-paths,
+	.bolt-edit-get-started__details {
+		grid-template-columns: 1fr;
+	}
+
+	.bolt-edit-path {
+		min-height: 0;
+	}
+
+	.bolt-edit-agent-tools__label {
+		width: 100%;
+	}
+}
+
+/* v2: keep feedback separate from content changes. */
+.bolt-edit-setting-row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid var(--bolt-edit-border);margin-bottom:16px}
+.bolt-edit-setting-row strong,.bolt-edit-setting-row small{display:block}.bolt-edit-setting-row small{font-size:13px;color:var(--bolt-edit-muted);margin-top:6px}.bolt-edit-setting-row input{width:24px;height:24px;accent-color:var(--bolt-edit-accent)}
+.bolt-edit-setting-switch{position:relative;display:inline-flex;flex:0 0 48px;width:48px;height:28px;cursor:pointer}
+.bolt-edit-wrap .bolt-edit-setting-switch input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;z-index:1;cursor:pointer}
+.bolt-edit-setting-switch__track{width:100%;height:100%;border-radius:999px;background:var(--bolt-edit-muted);transition:background-color 140ms ease}
+.bolt-edit-setting-switch__track::after{content:"";position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 4px #0002;transition:transform 140ms ease}
+.bolt-edit-setting-switch input:checked + .bolt-edit-setting-switch__track{background:var(--bolt-edit-accent)}
+.bolt-edit-setting-switch input:checked + .bolt-edit-setting-switch__track::after{transform:translateX(20px)}
+.bolt-edit-setting-switch input:focus-visible + .bolt-edit-setting-switch__track{outline:3px solid var(--bolt-edit-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.bolt-edit-setting-switch__track,.bolt-edit-setting-switch__track::after{transition:none}}
+.bolt-edit-wrap .bolt-edit-settings-notice{background:var(--bolt-edit-subtle);padding:16px;border-radius:8px}
+.bolt-edit-comment-filters,.bolt-edit-comment-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.bolt-edit-comment-actions form{margin:0}.bolt-edit-comment-record{border-top:1px solid var(--bolt-edit-border);padding:24px 0}.bolt-edit-comment-heading{display:flex;justify-content:space-between;align-items:center;gap:16px}.bolt-edit-comment-heading h3{margin:0}.bolt-edit-comment-badge{background:var(--bolt-edit-subtle);color:var(--bolt-edit-accent);border-radius:999px;font-size:12px;font-weight:600;padding:4px 12px}.bolt-edit-card .bolt-edit-comment-text{white-space:pre-wrap;margin:16px 0}.bolt-edit-card .bolt-edit-comment-meta{font-size:13px;color:var(--bolt-edit-muted)}.bolt-edit-comment-empty{padding:24px 0}.bolt-edit-wrap .bolt-edit-button--quiet{background:var(--bolt-edit-subtle);color:var(--bolt-edit-ink)}.bolt-edit-wrap .bolt-edit-button--quiet:hover{background:var(--bolt-edit-border)}
+
+/* Admin notices: shown below the header, in the gray area. wp-header-end moves them there; hidden until then so nothing jumps. */
+body.toplevel_page_bolt-edit #wpbody-content>div.notice,body.toplevel_page_bolt-edit #wpbody-content>div.updated,body.toplevel_page_bolt-edit #wpbody-content>div.error{display:none}
+.bolt-edit-wrap>div.notice,.bolt-edit-wrap>div.updated,.bolt-edit-wrap>div.error{box-sizing:border-box;max-width:680px;width:calc(100% - 80px);margin:24px auto 0}
+@media(max-width:782px){.bolt-edit-wrap>div.notice,.bolt-edit-wrap>div.updated,.bolt-edit-wrap>div.error{width:calc(100% - 48px)}}
+
+/* License tab: full GPL text in a scrollable block. */
+.bolt-edit-license {
+	max-height: 480px;
+	overflow: auto;
+	padding: 16px;
+	background: #f6f7f7;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+	font-size: 12px;
+	line-height: 1.5;
+	white-space: pre-wrap;
+}

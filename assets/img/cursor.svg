@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+	<g transform="rotate(45 12 12)" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round">
+		<rect x="9" y="1" width="6" height="3.5" rx="1" fill="#36CC4E"/>
+		<rect x="9" y="4.5" width="6" height="10.5" fill="#003399"/>
+		<polygon points="9,15 15,15 12,21" fill="#003399"/>
+	</g>
+</svg>
