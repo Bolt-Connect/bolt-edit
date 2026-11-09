@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Bolt Edit 1.0.0\n"
+"Project-Id-Version: Bolt Edit 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Bolt-Connect/bolt-edit/issues\n"
-"POT-Creation-Date: 2026-10-18 16:56+0000\n"
+"POT-Creation-Date: 2026-11-09 10:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -11,714 +11,1878 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Domain: bolt-edit\n"
 
-#: includes/class-bolt-edit-admin.php:44 includes/class-bolt-edit-admin.php:45 includes/class-bolt-edit-admin.php:136
-msgid "Bolt Edit"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:71 includes/class-bolt-edit-admin.php:146 includes/class-bolt-edit-plugin.php:162 includes/class-bolt-edit-plugin.php:195
-msgid "Open Bolt Edit"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:116
-msgid "You do not have permission to view this page."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:120 includes/class-bolt-edit-admin.php:228
-msgid "Changes"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:121 includes/class-bolt-edit-admin.php:195
-msgid "Comments"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:122
-msgid "Get started"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:123 includes/class-bolt-edit-admin.php:390
+#: includes/admin/class-bolt-edit-admin-about.php:21 includes/class-bolt-edit-admin.php:99
 msgid "About"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:124 includes/class-bolt-edit-admin.php:458
-msgid "Release notes"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:125 includes/class-bolt-edit-admin.php:428
-msgid "License"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:128
-msgid "Settings"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:167
-msgid "A simpler editing experience"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:167
-msgid "Client mode"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:169
-msgid "Settings saved."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:172 includes/class-bolt-edit-admin.php:172
-msgid "Enable client mode"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:172
-msgid "Create the Clients role and simplify their editing screens."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:173
-msgid "Assign the Clients role to your client accounts in WordPress. Clients start on the website and use the existing managed-content links to open the correct editor."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:174
-msgid "The WordPress top bar and left menu are hidden. The editor sidebar stays available for featured images, categories, and content fields."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:175
-msgid "Static page content stays editable through the pencil. Clients can create, edit, and trash blog posts, products, and frontend-facing custom post types. Pages remain unavailable in the backend."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:176
-msgid "Disabling client mode keeps assigned users in the Clients role but removes their content-editing access until you enable it again or assign another role."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:177
-msgid "Save settings"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:195
-msgid "Client feedback"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:195
-msgid "Private notes attached to the website. Content changes stay in their own tab."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:196
-msgid "Comment status"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:197 includes/class-bolt-edit-plugin.php:175
-msgid "Open"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:198 includes/class-bolt-edit-admin.php:203 includes/class-bolt-edit-plugin.php:176
-msgid "Resolved"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:200
-msgid "No resolved comments yet."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:200
-msgid "No open comments."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:203
-msgid "Page element"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:203 includes/class-bolt-edit-plugin.php:232
-msgid "Comment"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:206
-msgid "View on website"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:207
-msgid "Reopen"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:207
-msgid "Resolve"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:211
-msgid "Comment pages"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:211
-msgid "Previous"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:211
-msgid "Next"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:227
-msgid "Content history"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:234
-msgid "No changes yet"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:235
-msgid "Every change saved through Bolt Edit appears here, with the value before and after."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:260
-msgid "We are going to build a custom WordPress theme that works with the Bolt Edit plugin. Bolt Edit has specific theme-building instructions that you must follow throughout the project. Find and read the complete instructions in WordPress admin under Bolt Edit > Get Started > For AI Agents, or locate docs/agent-instructions.md inside the active Bolt Edit plugin. If your environment cannot access them, ask me to copy them into this conversation."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:265
-msgid "Generate the website design and code inside the theme according to the prompt I provide. Build the first complete version and follow the Bolt Edit instructions throughout the project."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:266 includes/class-bolt-edit-admin.php:275
-msgid "Website link: [Insert link]"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:267
-msgid "Website idea or design brief:"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:274
-msgid "I am providing an HTML template. Start with the complete template package I provide and convert it into a maintainable custom WordPress theme by following the Bolt Edit instructions."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:276
-msgid "HTML template location or files:"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:284
-msgid "For you"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:285
-msgid "For AI agents"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:290
-msgid "Choose your starting point"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:291
-msgid "Build a custom theme with your AI coding tool"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:292
-msgid "Bolt Edit provides the editable content layer and the rules your agent follows. Your coding tool builds the WordPress theme."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:295
-msgid "Compatible AI coding tools"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:296
-msgid "Works with"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:297
-msgid "Codex"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:298
-msgid "Claude"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:299
-msgid "Cursor"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:300
-msgid "Any other coding agents"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:306
-msgid "Path 1"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:307
-msgid "Start from an idea"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:308
-msgid "Describe the website and let your agent design and build the complete theme from scratch."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:309 includes/class-bolt-edit-admin.php:320
-msgid "Prompt copied"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:310
-msgid "Copy starter prompt"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:317
-msgid "Path 2"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:318
-msgid "Convert an HTML template"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:319
-msgid "Give your agent the complete HTML package and have it preserve the design while turning it into a proper WordPress theme."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:321
-msgid "Copy conversion prompt"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:327
-msgid "How to use it"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:330
-msgid "Connect your coding tool to WordPress"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:331
-msgid "Connect it to this website through MCP or another WordPress integration, or open your local WordPress installation as a project folder."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:334
-msgid "Use a starter prompt"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:335
-msgid "Copy the prompt for your starting point, then add the website link and your idea or HTML template location."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:338
-msgid "Let the agent build or convert the theme"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:339
-msgid "The agent builds the theme, creates the pages, imports editable images, and follows the Bolt Edit instructions."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:342
-msgid "Review and refine the result"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:343
-msgid "Check every page, test text, buttons and images in Bolt Edit, and ask your agent to fix anything that needs work."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:349
-msgid "Later design changes"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:350
-msgid "Return to your agent with the same instructions. Saved content remains intact as long as the field IDs and types stay the same."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:353
-msgid "Client access"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:354
-msgid "Administrators and Editors can use Bolt Edit. For a simpler client experience, enable client mode in Settings and assign the Clients role to your client accounts."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:361
-msgid "The complete contract"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:362
-msgid "Instructions for the coding agent"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:363
-msgid "Copy these instructions into any coding agent, or let a connected agent read them through the WordPress files or MCP environment."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:366
-msgid "Copied"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:367
-msgid "Copy instructions"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:369
-msgid "Bundled with Bolt Edit:"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:371
-msgid "Instructions for AI agents"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:391
+#: includes/admin/class-bolt-edit-admin-about.php:22
 msgid "About Bolt Edit"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:393
+#: includes/admin/class-bolt-edit-admin-about.php:24
 msgid "Bolt Edit lets clients change the words and images on their website, right on the page, without touching the design."
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:395
+#: includes/admin/class-bolt-edit-admin-about.php:26
 msgid "The theme owns the design. Other plugins keep owning their own data. Every piece of static text or image in the theme becomes a field the client can edit. One field, one owner. Nothing lives in two places."
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:397
-msgid "Bolt Edit does nothing on its own. It needs a theme built to use its helpers, following the instructions in the Get started tab. It will not make an existing page builder or block theme editable."
+#: includes/admin/class-bolt-edit-admin-about.php:28
+msgid "Bolt Edit does nothing on its own. It needs a theme built to use its helpers, following the instructions in the How to use tab. It will not make an existing page builder or block theme editable."
 msgstr ""
 
 #. translators: %s: link to the Bolt Connect website.
-#: includes/class-bolt-edit-admin.php:403
+#: includes/admin/class-bolt-edit-admin-about.php:34
 #, php-format
 msgid "Bolt Edit is developed and maintained by %s."
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:407
+#: includes/admin/class-bolt-edit-admin-about.php:38
 msgid "https://www.boltconnect.nl/en"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:429
-msgid "GNU General Public License v2 or later"
+#: includes/admin/class-bolt-edit-admin-about.php:45
+msgid "Run into a problem or a bug? Contact us and describe what happened and on which page."
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:432
-msgid "Copyright © 2026 Bolt Connect and contributors."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:434
-msgid "Bolt Edit is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:436
-msgid "Bolt Edit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the full license text below for details."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:441
-msgid "Read the full license text"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:459
-msgid "What is new in Bolt Edit"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:465
-msgid "October 2026"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:468
-msgid "Text, rich text, button and image fields, editable on the live page."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:469
-msgid "Empty image fields show a clickable placeholder for editors, so a theme can ship without images."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:470
-msgid "Managed regions for content owned by ACF, JetEngine, WooCommerce or WordPress, with a link to the right edit screen."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:471
-msgid "A Changes log with who, where, when, and the value before and after."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:472
-msgid "Private comments anywhere on the website, with a separate inbox and Resolve action."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:473
-msgid "Optional Clients role with simplified post and product editing screens."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:474
-msgid "Dutch translation. Bolt Edit follows the WordPress language: Dutch for every Dutch locale, English for all other languages."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:475
-msgid "Instructions for AI agents, included in the plugin."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:476
-msgid "Updates through GitHub releases."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:494
-msgid "Need help?"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:495
-msgid "Bolt Edit is maintained by Bolt Connect. Run into a problem or a bug? Contact us and describe what happened and on which page."
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:497
+#: includes/admin/class-bolt-edit-admin-about.php:46
 msgid "Contact Bolt Connect"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:513
+#: includes/admin/class-bolt-edit-admin-about.php:64 includes/class-bolt-edit-admin.php:101
+msgid "License"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-about.php:65
+msgid "GNU General Public License v2 or later"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-about.php:68
+msgid "Copyright © 2026 Bolt Connect and contributors."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-about.php:70
+msgid "Bolt Edit is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-about.php:72
+msgid "Bolt Edit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the full license text below for details."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-about.php:77
+msgid "Read the full license text"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:22 includes/admin/class-bolt-edit-admin-changelog.php:44 includes/admin/class-bolt-edit-admin-get-started.php:174
+msgid "Changes"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:23 includes/admin/class-bolt-edit-admin-changelog.php:78 includes/admin/class-bolt-edit-admin-get-started.php:174
+msgid "Comments"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:43
+msgid "Content history"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:50
+msgid "No changes yet"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:51
+msgid "Every change saved through Bolt Edit appears here, with the value before and after."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:77
+msgid "Client feedback"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:81
+msgid "Comment status"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:82 includes/class-bolt-edit-plugin.php:212
+msgid "Open"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:83 includes/class-bolt-edit-plugin.php:213
+msgid "Resolved"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:89
+msgid "No resolved comments yet"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:89
+msgid "No open comments"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:90
+msgid "Comments you resolve move here."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:90
+msgid "Private notes left on the website appear here."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:99 includes/admin/class-bolt-edit-admin-changelog.php:157
 msgid "Unknown user"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:534
-msgid "a site-wide field"
+#: includes/admin/class-bolt-edit-admin-changelog.php:105
+msgid "the website"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:111
+msgid "Page element"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:113 includes/admin/class-bolt-edit-admin-templates.php:228
+msgid "View"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:115
+msgid "Reopen"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:115
+msgid "Resolve"
 msgstr ""
 
 #. translators: 1: user name with avatar, 2: page or location, 3: date and time.
-#: includes/class-bolt-edit-admin.php:550
+#: includes/admin/class-bolt-edit-admin-changelog.php:124
+#, php-format
+msgid "%1$s commented on %2$s on %3$s"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:133
+msgid "Edited"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:140
+msgid "Comment pages"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:141
+msgid "Previous"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:142
+msgid "Next"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:178
+msgid "a site-wide field"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-changelog.php:185 includes/admin/class-bolt-edit-admin-get-started.php:27 includes/admin/class-bolt-edit-admin-get-started.php:157 includes/admin/class-bolt-edit-admin-get-started.php:158 includes/admin/class-bolt-edit-admin-get-started.php:167 includes/class-bolt-edit-plugin.php:203 includes/class-bolt-edit-plugin.php:204 includes/class-bolt-edit-plugin.php:252 includes/class-bolt-edit-plugin.php:272 includes/class-bolt-edit-plugin.php:292
+msgid "Edit"
+msgstr ""
+
+#. translators: 1: user name with avatar, 2: page or location, 3: date and time.
+#: includes/admin/class-bolt-edit-admin-changelog.php:192
 #, php-format
 msgid "%1$s updated %2$s on %3$s"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:559 includes/class-bolt-edit-plugin.php:177 includes/template-functions.php:316
-msgid "Edit"
-msgstr ""
-
-#: includes/class-bolt-edit-admin.php:564
+#: includes/admin/class-bolt-edit-admin-changelog.php:201
 msgid "Before:"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:566
+#: includes/admin/class-bolt-edit-admin-changelog.php:203
 msgid "After:"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:609
+#: includes/admin/class-bolt-edit-admin-changelog.php:246
 msgid "No image"
 msgstr ""
 
 #. translators: %d: Media attachment ID.
-#: includes/class-bolt-edit-admin.php:616
+#: includes/admin/class-bolt-edit-admin-changelog.php:253
 #, php-format
 msgid "Media #%d"
 msgstr ""
 
-#: includes/class-bolt-edit-admin.php:628 includes/class-bolt-edit-admin.php:634
+#: includes/admin/class-bolt-edit-admin-changelog.php:265 includes/admin/class-bolt-edit-admin-changelog.php:271
 msgid "Empty"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:63
-msgid "Clients"
+#: includes/admin/class-bolt-edit-admin-features.php:17 includes/admin/class-bolt-edit-admin-features.php:20
+msgid "Nobody yet"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:146
-msgid "You are logged out."
+#: includes/admin/class-bolt-edit-admin-features.php:21 includes/admin/class-bolt-edit-admin-features.php:106
+msgid "On"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:146
-msgid "You can now view the website without Bolt Edit."
+#: includes/admin/class-bolt-edit-admin-features.php:21 includes/admin/class-bolt-edit-admin-features.php:101
+msgid "Off"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:146 includes/class-bolt-edit-client.php:244
-msgid "Back to website"
+#: includes/admin/class-bolt-edit-admin-features.php:25 includes/class-bolt-edit-access.php:78
+msgid "Access"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:217
-msgid "Move to trash"
+#: includes/admin/class-bolt-edit-admin-features.php:26 includes/admin/class-bolt-edit-admin-features.php:61 includes/admin/class-bolt-edit-admin-get-started.php:141
+msgid "Focus mode"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:217
-msgid "Keep editing"
+#: includes/admin/class-bolt-edit-admin-features.php:27 includes/admin/class-bolt-edit-admin-features.php:82 includes/class-bolt-edit-dev.php:123
+msgid "Dev mode"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:217
-msgid "Move this content to trash?"
+#: includes/admin/class-bolt-edit-admin-features.php:28
+msgid "Hidden status"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:217
-msgid "You can restore it from the trash later."
+#: includes/admin/class-bolt-edit-admin-features.php:29 includes/class-bolt-edit-updates.php:193
+msgid "Plugin updates"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:241
-msgid "Client"
+#: includes/admin/class-bolt-edit-admin-features.php:33
+msgid "Settings saved."
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:242
-msgid "Client navigation"
+#: includes/admin/class-bolt-edit-admin-features.php:35
+msgid "Settings sections"
 msgstr ""
 
-#. translators: %s: plural post type label.
-#: includes/class-bolt-edit-client.php:243
+#: includes/admin/class-bolt-edit-admin-features.php:36 includes/admin/class-bolt-edit-admin-features.php:45
+msgid "Overview"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:45 includes/class-bolt-edit-admin.php:108
+msgid "Features"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:46
+msgid "Everything you can set up in Bolt Edit, and where each part stands."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:61
+msgid "A calmer WordPress"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:62
+msgid "Give the people who edit their own website a calmer WordPress. Pick the users below. They keep their normal role."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:64
+msgid "Who gets focus mode"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:65
+msgid "Administrators can't be added."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:65
+msgid "Need a new user?"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:65
+msgid "Add one in Users"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:67
+msgid "Users with focus mode"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:69
+msgid "What they see"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:70
+msgid "These two settings apply to everyone selected above."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:76
+msgid "Want to hide more menu items for them? You need a menu plugin for that."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:82
+msgid "See what the AI built"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:83
+msgid "Dev mode adds a Dev button next to Edit on the website. Click an element to change its framework class and to check whether the CSS follows your framework. Dev mode works best when your framework classes start with a prefix. Agents that build with Bolt Edit add it for you."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:85
+msgid "Who gets Dev mode"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:86
+msgid "Dev mode is for administrators only. Only the administrators below see the Dev button. Add yourself to try it."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:88
+msgid "Users with Dev mode"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:88
+msgid "user has Dev mode"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:88
+msgid "users have Dev mode"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:90
+msgid "Dev mode reads the page in your browser. Nothing is sent or stored."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:96
+msgid "Hidden statuses"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:96 includes/admin/class-bolt-edit-admin-features.php:98
+msgid "Show hidden status"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:98
+msgid "By default, forms don't show the messages people see after they fill them out, like a thank-you or an error. Turn this on to see them too, and edit them with Bolt Edit."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:102 includes/admin/class-bolt-edit-admin-features.php:107
+msgid "Contact us"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:102 includes/admin/class-bolt-edit-admin-features.php:107
+msgid "Your name"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:102 includes/admin/class-bolt-edit-admin-features.php:107
+msgid "Your email"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:102 includes/admin/class-bolt-edit-admin-features.php:107 includes/admin/class-bolt-edit-admin-get-started.php:158 includes/class-bolt-edit-plugin.php:209
+msgid "Send"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-features.php:107
+msgid "Thanks, your message is sent"
+msgstr ""
+
+#. translators: %d: number of users
+#: includes/admin/class-bolt-edit-admin-features.php:17 includes/admin/class-bolt-edit-admin-features.php:20
 #, php-format
-msgid "All %s"
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:20
+msgid "Marble & Oak"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:245 includes/class-bolt-edit-plugin.php:200
-msgid "Log out"
+#: includes/admin/class-bolt-edit-admin-get-started.php:20
+msgid "Shop"
 msgstr ""
 
-#: includes/class-bolt-edit-client.php:253
+#: includes/admin/class-bolt-edit-admin-get-started.php:20
+msgid "Story"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:22 includes/admin/class-bolt-edit-admin-get-started.php:157 includes/admin/class-bolt-edit-admin-get-started.php:174
+msgid "Freshly roasted coffee"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:23
+msgid "Small-batch beans, shipped within two working days."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:24
+msgid "Shop beans"
+msgstr ""
+
+#. translators: %s: the address of this website
+#: includes/admin/class-bolt-edit-admin-get-started.php:39
+#, php-format
+msgid "Website: %s. Work on it through your MCP connection to this website. If you are not connected to it, stop and tell me."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:40
+msgid "We are going to build a custom WordPress theme that works with the Bolt Edit plugin. Bolt Edit has specific theme-building instructions that you must follow throughout the project. Read the complete instructions first with the bolt-edit/get-instructions ability. It returns all instructions, including any that the site owner added, and those additions win when they conflict. If you cannot reach the ability, stop and tell me."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:46
+msgid "Generate the website design and code inside the theme according to the prompt I provide. Build the first complete version and follow the Bolt Edit instructions throughout the project."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:47
+msgid "Website idea or design brief:"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:55
+msgid "I am providing an existing HTML design. That can be a single HTML file, an HTML prototype with separate CSS, JavaScript, fonts and images, or a whole folder of files. Use everything I provide and convert it into a maintainable custom WordPress theme by following the Bolt Edit instructions."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:56
+msgid "HTML files or folder location:"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:64
+msgid "For you"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:65
+msgid "For clients"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:70 includes/class-bolt-edit-admin.php:100
+msgid "How to use"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:71
+msgid "Build a custom theme with your AI coding tool"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:72
+msgid "Bolt Edit provides the editable content layer and the rules your agent follows. Your coding tool builds the WordPress theme."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:75
+msgid "Phase 1: Connect your AI tool through MCP"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:76
+msgid "Pick an MCP plugin or solution you like, add it to this website and connect it to your favourite AI tool."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:77
+msgid "Compatible AI coding tools"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:78
+msgid "Works with"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:79
+msgid "Codex"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:80
+msgid "Claude"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:81
+msgid "Cursor"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:82
+msgid "Gemini"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:83
+msgid "Any other coding agents"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:86
+msgid "Phase 2: Start something new"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:87
+msgid "Copy the prompt for your starting point, add your idea or the location of your HTML files, and let your agent build the theme. The link to this website is already in it."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:92
+msgid "Path 1"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:93
+msgid "Start from an idea"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:94
+msgid "Describe the website and let your agent design and build the complete theme from scratch."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:95 includes/admin/class-bolt-edit-admin-get-started.php:106 includes/admin/class-bolt-edit-admin-get-started.php:118 includes/class-bolt-edit-ai-instructions.php:444
+msgid "Prompt copied"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:96
+msgid "Copy starter prompt"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:103
+msgid "Path 2"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:104
+msgid "Convert an HTML prototype"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:105
+msgid "Give your agent your HTML design, from a single file to a whole folder with CSS, scripts and images, and have it keep the design while turning it into a proper WordPress theme."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:107
+msgid "Copy conversion prompt"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:113
+msgid "Phase 3: Build the website"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:114
+msgid "Keep prompting and build the website the way you want. Now and then, remind your agent to follow the Bolt Edit instructions. It is not required: Phase 4 checks the whole site afterwards."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:116
+msgid "Phase 4: Clean up before you launch"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:117
+msgid "AI makes mistakes. It skips a step, jumps ahead and forgets things along the way. The clean-up prompt makes your agent check the whole site against the Bolt Edit instructions, from the CSS to SEO, mobile and speed, and fix what slipped. It ends with a short summary in plain words. After that, check every page yourself and test your text, buttons and images in Bolt Edit."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:118 includes/class-bolt-edit-ai-instructions.php:444
+msgid "Copy clean-up prompt"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:122
+msgid "Good to know"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:123
+msgid "Light for visitors, safe to build on"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:126
+msgid "Your website stays fast"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:126
+msgid "Bolt Edit only loads for people who are logged in and allowed to edit. Your visitors never load the Edit button or the editing tools, so your website stays just as fast."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:127
+msgid "Turning Bolt Edit off is safe"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:127
+msgid "Your agent builds a normal WordPress theme, so every page keeps showing its content without Bolt Edit. We do recommend keeping it on: without it there is no easy editing and no AI instructions to keep the theme well built."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:128
+msgid "A theme you can hand over"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:128
+msgid "Everything is built the same way: one design system, real WordPress pages and images in the Media Library. Another developer with their own AI agent can pick it up and keep building without starting over."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:134
+msgid "The problem"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:135
+msgid "Clients want simple page editing"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:136
+msgid "Clients are often overwhelmed when they log in to the WordPress dashboard. Bolt Edit changes that with a super easy front-end editing experience, so they only go to the dashboard when they really need to. It is the easiest way to let clients make changes to an AI-generated WordPress theme: click the pencil, edit, save. It also works with dynamic plugins through a popup, and you as the developer keep full control over how the theme is built."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:141
+msgid "They log in and land on the website"
+msgstr ""
+
+#. translators: %s: link to the Focus mode settings
+#: includes/admin/class-bolt-edit-admin-get-started.php:141
+#, php-format
+msgid "%s starts them on the website, with a simple top bar instead of the full WordPress menu."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:141
+msgid "Focus mode starts them on the website, with a simple top bar instead of the full WordPress menu."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:143 includes/admin/class-bolt-edit-admin-get-started.php:143
+msgid "Log in"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:143
+msgid "name@company.com"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:150
+msgid "They point at text and click"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:150
+msgid "Anything they can change gets a blue outline and a pencil cursor. A click opens it in a popup."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:155
+msgid "They edit, or leave a comment"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:155
+msgid "Edit saves the change. Comment sends you a private note about that exact spot."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:157 includes/admin/class-bolt-edit-admin-get-started.php:158 includes/admin/class-bolt-edit-admin-get-started.php:167 includes/class-bolt-edit-plugin.php:273 includes/class-bolt-edit-plugin.php:278
+msgid "Comment"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:157 includes/admin/class-bolt-edit-admin-get-started.php:167 includes/class-bolt-edit-ai-instructions.php:420 includes/class-bolt-edit-plugin.php:219 includes/class-bolt-edit-plugin.php:225 includes/class-bolt-edit-plugin.php:290 includes/class-bolt-edit-plugin.php:344
+msgid "Save"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:158
+msgid "Can we make this headline bigger?"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:163
+msgid "Dynamic content opens what it needs"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:163
+msgid "Products, posts and other managed content get a gray outline. Popular dynamic content plugins open their edit screen in the popup, scrolled to the field you clicked and outlined. Their role decides what they may edit: WooCommerce products need the Shop manager role."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:165 includes/admin/class-bolt-edit-admin-get-started.php:167
+msgid "Cerrado"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:165
+msgid "€14.00 / 250g"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:165
+msgid "Kirinyaga"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:165
+msgid "€12.90 / 250g"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:167
+msgid "Product name"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:167
+msgid "Price"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:167
+msgid "14.00"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:172
+msgid "You see what changed"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:172
+msgid "Every edit is logged with the value before and after, under Changes. Comments land next to it, under Comments."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:174
+msgid "Home headline"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:174
+msgid "Updated by your client, 10:42"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-get-started.php:174
+msgid "Fresh coffee"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:38 includes/class-bolt-edit-admin.php:106 includes/class-bolt-edit-ai-instructions.php:37
+msgid "Templates"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:39
+msgid "The template files in the active theme and where each one is used."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:41
+msgid "Brand guide"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:41
+msgid "This page is public. Set it to Private."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:48
+msgid "No templates found"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:49
+msgid "The active theme has no PHP template files yet."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:53
+msgid "Filter templates"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:54
+msgid "All"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:67
+msgid "Click to copy the file name"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:91
+msgid "Page templates"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:92
+msgid "Template parts"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:93
+msgid "Post templates"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:94
+msgid "Archive templates"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:95
+msgid "Other"
+msgstr ""
+
+#. translators: %s: template files, for example index.php and 404.php.
+#: includes/admin/class-bolt-edit-admin-templates.php:155
+#, php-format
+msgid "Shown on every template except %s."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:157
+msgid "Shown on every template."
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:164
+msgid "Templates:"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:164
+msgid "Shown on:"
+msgstr ""
+
+#. translators: %d: number of templates that are not shown yet.
+#: includes/admin/class-bolt-edit-admin-templates.php:169
+#, php-format
+msgid "%d more"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-templates.php:171
+msgid "Show less"
+msgstr ""
+
+#. translators: %s: list of page links.
+#: includes/admin/class-bolt-edit-admin-templates.php:208
+#, php-format
+msgid "Used on: %s"
+msgstr ""
+
+#. translators: %d: number of pages that are not listed.
+#: includes/admin/class-bolt-edit-admin-templates.php:214
+#, php-format
+msgid "and %d more page"
+msgid_plural "and %d more pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/class-bolt-edit-admin-ui.php:40
+msgid "Save settings"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-ui.php:71 includes/class-bolt-edit-plugin.php:205
+msgid "Saved"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-ui.php:73
+msgid "Search users by name or email"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-ui.php:73
+msgid "Search users"
+msgstr ""
+
+#: includes/admin/class-bolt-edit-admin-ui.php:76
+msgid "No users yet. Search above to add someone."
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:68
+msgid "Administrator and Editor"
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:71
+msgid "Administrators only"
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:78
+msgid "Who can edit"
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:79
+msgid "Choose which user roles may edit on the website: the Edit button and the comments. Roles that are off do not see it at all."
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:81
+msgid "Administrator"
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:81
+msgid "Administrators always have access to front-end editing, so you can never lock yourself out. Dev mode is set per user. Administrators are also the only ones who see the Bolt Edit page in the dashboard."
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:86
+msgid "Dynamic content"
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:87
+msgid "Texts and images that Bolt Edit makes editable work for every role that is on. Dynamic content, like WooCommerce products, custom fields or menus, belongs to its own plugin, and that plugin decides who may edit it. If a role is not allowed to, the area still gets its outline on the website, but the popup tells them they do not have access. Give the role the permission that plugin needs. WooCommerce products, for example, need the Shop manager role."
+msgstr ""
+
+#: includes/class-bolt-edit-access.php:88
+msgid "Every role on this site is listed. A role that is on gets access to Bolt Edit, whatever its other permissions are. Focus mode and Dev mode work on top of this: they are set per user."
+msgstr ""
+
+#. translators: %d: number of roles besides Administrator
+#: includes/class-bolt-edit-access.php:71
+#, php-format
+msgid "Administrator and %d role"
+msgid_plural "Administrator and %d roles"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-bolt-edit-admin.php:46 includes/class-bolt-edit-admin.php:47 includes/class-bolt-edit-admin.php:120
+msgid "Bolt Edit"
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:83
+msgid "Remove"
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:83
+msgid "user has focus mode"
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:83
+msgid "users have focus mode"
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:83
+msgid "No users found"
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:83
+msgid "more. Keep typing to narrow it down."
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:83
+msgid "Could not save. Please try again."
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:94
+msgid "You do not have permission to view this page."
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:98
+msgid "Change log"
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:107 includes/class-bolt-edit-ai-instructions.php:377 includes/class-bolt-edit-ai-instructions.php:431
+msgid "AI instructions"
+msgstr ""
+
+#: includes/class-bolt-edit-admin.php:130
+msgid "Open Bolt Edit"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:30
+msgid "Front-end editing"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:31
+msgid "AI often hard-codes the text and images in the templates, so a client cannot change anything without a developer."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:32
+msgid "The agent starts from your idea or from your own HTML template, builds the theme, and hands all static content to Bolt Edit. You and your clients then edit text, buttons and images right on the website. The site keeps working, and shows its content, even when the plugin is switched off."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:33
+msgid "Example: Make every heading, text and button editable, also in the footer."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:38
+msgid "Agents often paste the header and footer into every page, or forget the 404, search and blog templates. Those then fall back to the plain WordPress look."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:39
+msgid "One shared header and footer for the whole site, repeated sections in one file, and a 404, search and blog template in your design."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:40
+msgid "Example: Always add a simple landing page template without a menu."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:44
+msgid "Pages and site basics"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:45
+msgid "A page that only exists as a template does not show up under Pages in WordPress, so you cannot manage it or link to it."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:46
+msgid "The agent creates a real WordPress page for every page, sets your homepage as the front page, and builds a menu you can edit and reorder. The theme also gets a proper name and screenshot, and a favicon or share image only when you provide one."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:47
+msgid "Example: Always add a Contact page and a Privacy page."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:51
+msgid "Content and images"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:52
+msgid "Hard-coded text and images can only be changed by a developer, and some content, like products, already belongs to another plugin."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:53
+msgid "Every text and image on the page becomes editable on the front end. Images go into the Media Library in a fixed frame, so replacing a photo never breaks the layout. Content from plugins like ACF or WooCommerce stays where it is. Images come from your own files, free Pexels and Unsplash photos, or the image model of your AI."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:54
+msgid "Example: Keep button labels under 30 characters."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:58
+msgid "Design system"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:59
+msgid "AI-written CSS gets messy fast: values everywhere, classes that fight each other, and a design that is hard to change later."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:60
+msgid "The agent uses your CSS framework if you bring one. If not, Bolt Edit gives it a default framework to build with, so the code stays clean. It also adds a private brand guide page."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:61
+msgid "Example: Use at most two font families."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:65
+msgid "Mobile"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:66
+msgid "AI-built sections often look fine on a desktop and break on a phone."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:67
+msgid "Every section works from 360 px wide, and the mobile menu works with touch and keyboard. The focus outline stays visible and animations respect visitors who want less motion."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:68
+msgid "Example: Use the breakpoints 768 px and 1200 px."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:72
+msgid "Speed"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:73
+msgid "Fonts from outside servers and heavy images slow a site down, and fonts from outside servers are a GDPR risk."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:74
+msgid "Fonts load from your own server, styles and scripts load the WordPress way, and images are resized, converted to WebP and compressed before they are uploaded."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:75
+msgid "Example: Only load a script on the pages that use it."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:79
+msgid "Safety"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:80
+msgid "Text from the database or from a visitor can hide harmful code if a theme prints it as it is."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:81
+msgid "The agent is told to clean everything it prints and to check that only the right people can save things. It is an instruction, so it helps, but it is not a guarantee."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:82
+msgid "These are only a few basic checks on the code the agent writes. They do not replace a security plugin, so it is recommended to use one as well."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:83
+msgid "Example: Never put passwords or API keys in theme files."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:87 includes/class-bolt-edit-seo.php:250
+msgid "SEO"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:88
+msgid "Bolt Edit pages keep their content in the theme, so SEO plugins like Yoast and Rank Math see an empty page. Google does not mind, but those plugins do."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:89
+msgid "The agent first checks whether your site already has an SEO plugin, then follows one of two paths. Either way, every page gets one main heading and every image gets alt text."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:92
+msgid "You have an SEO plugin"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:93
+msgid "The plugin owns your titles, descriptions and sitemap. The agent only gives it the text of your pages, so its content checks work, and it prints no SEO tags itself."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:96
+msgid "You have no SEO plugin"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:97
+msgid "Bolt Edit adds an SEO box to every page and post with a title and a meta description. The agent fills it in from the real page content."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:100
+msgid "Example: Write SEO titles in Dutch and keep them under 55 characters."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:104
+msgid "Final checks"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:105
+msgid "Without a check, a theme can look finished and still miss pages, have the wrong images or broken edit buttons."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:106
+msgid "The agent runs a checklist before it calls a theme done, and follows a list of things it must never do."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:107
+msgid "Example: Also check the site at 320 px wide."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:274 includes/class-bolt-edit-client.php:278 includes/class-bolt-edit-client.php:337 includes/class-bolt-edit-dev.php:157
 msgid "You cannot change these settings."
 msgstr ""
 
-#: includes/class-bolt-edit-comments.php:87 includes/class-bolt-edit-comments.php:169
+#: includes/class-bolt-edit-ai-instructions.php:345
+msgid "The instructions file could not be found. Reinstall Bolt Edit to restore it."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:356
+msgid "AI instruction sections"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:364 includes/class-bolt-edit-ai-instructions.php:431
+msgid "Clean-up"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:381 includes/class-bolt-edit-ai-instructions.php:434
+msgid "The problem:"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:382 includes/class-bolt-edit-ai-instructions.php:435
+msgid "The solution:"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:384 includes/class-bolt-edit-ai-instructions.php:436
+msgid "Good to know:"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:398
+msgid "The default for this section changed."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:398
+msgid "Your additions are untouched. Open the default below to see what is new."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:399
+msgid "Got it"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:404
+msgid "Default instructions"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:404
+msgid "Read only. Updated with the plugin."
+msgstr ""
+
+#. translators: %s: section name
+#: includes/class-bolt-edit-ai-instructions.php:405
+#, php-format
+msgid "Default instructions: %s"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:411
+msgid "Your additions"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:412
+msgid "Added after the default. If your text conflicts with the default, yours wins."
+msgstr ""
+
+#. translators: %s: time since the last save, such as 2 days
+#: includes/class-bolt-edit-ai-instructions.php:415
+#, php-format
+msgid "Last saved %s ago"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:415
+msgid "Nothing added yet"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:418
+msgid "Clear additions"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:434
+msgid "AI makes mistakes. While it builds, it skips steps, jumps ahead and forgets parts of these instructions."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:435
+msgid "One prompt that makes your agent read all the instructions again, check the whole site against them and fix what slipped. The site keeps looking the same, and the agent ends with a short summary in non-technical words."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:436
+msgid "Use it before you launch and after bigger changes. Your own additions in the other tabs are part of the check."
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:439
+msgid "Clean-up prompt"
+msgstr ""
+
+#: includes/class-bolt-edit-ai-instructions.php:440
+msgid "Adjust it here before you copy it. Your changes are only for this copy and are not saved."
+msgstr ""
+
+#: includes/class-bolt-edit-classes.php:179 includes/class-bolt-edit-spacing.php:156
+msgid "Dev mode is not available for you."
+msgstr ""
+
+#: includes/class-bolt-edit-classes.php:190
+msgid "This element cannot be changed."
+msgstr ""
+
+#: includes/class-bolt-edit-classes.php:198
+msgid "Too many class changes. Make them in the theme first."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:80
+msgid "Simple top bar"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:80
+msgid "Only Dashboard (or Back to website) and Log out. Off shows the normal WordPress top bar."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:81
+msgid "Start on the website"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:81
+msgid "After logging in, these users land on the website instead of the dashboard."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:171
+msgid "You are logged out."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:171
+msgid "You can now view the website without Bolt Edit."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:171 includes/class-bolt-edit-client.php:213
+msgid "Back to website"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:213
+msgid "Dashboard"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:221
+msgid "Log out"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:249
+msgid "Move to trash"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:249
+msgid "Keep editing"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:249
+msgid "Move this content to trash?"
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:249
+msgid "You can restore it from the trash later."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:262
+msgid "This role has no access to Bolt Edit. Change it under Features, Access."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:315 includes/class-bolt-edit-dev.php:203
+msgid "This user cannot be added."
+msgstr ""
+
+#: includes/class-bolt-edit-client.php:321 includes/class-bolt-edit-dev.php:209
+msgid "Nothing to do."
+msgstr ""
+
+#: includes/class-bolt-edit-comments.php:106 includes/class-bolt-edit-comments.php:126 includes/class-bolt-edit-comments.php:153 includes/class-bolt-edit-comments.php:235
 msgid "This comment could not be found."
 msgstr ""
 
-#: includes/class-bolt-edit-comments.php:96
-msgid "Choose a page on this website."
+#: includes/class-bolt-edit-comments.php:109
+msgid "You can only delete your own comments."
 msgstr ""
 
-#: includes/class-bolt-edit-comments.php:101
-msgid "Comments belong on the frontend website."
+#: includes/class-bolt-edit-comments.php:114
+msgid "The comment could not be deleted. Please try again."
 msgstr ""
 
-#: includes/class-bolt-edit-comments.php:134
+#: includes/class-bolt-edit-comments.php:129
+msgid "You can only edit your own comments."
+msgstr ""
+
+#: includes/class-bolt-edit-comments.php:133 includes/class-bolt-edit-comments.php:200
 msgid "Write a comment of up to 5,000 characters."
 msgstr ""
 
-#: includes/class-bolt-edit-comments.php:143
-msgid "Select an element to attach your comment."
-msgstr ""
-
-#: includes/class-bolt-edit-comments.php:153
+#: includes/class-bolt-edit-comments.php:142 includes/class-bolt-edit-comments.php:219
 msgid "The comment could not be saved. Please try again."
 msgstr ""
 
-#: includes/class-bolt-edit-comments.php:173
+#: includes/class-bolt-edit-comments.php:162
+msgid "Choose a page on this website."
+msgstr ""
+
+#: includes/class-bolt-edit-comments.php:167
+msgid "Comments belong on the frontend website."
+msgstr ""
+
+#: includes/class-bolt-edit-comments.php:209
+msgid "Select an element to attach your comment."
+msgstr ""
+
+#: includes/class-bolt-edit-comments.php:239
 msgid "The comment status could not be saved."
 msgstr ""
 
-#: includes/class-bolt-edit-comments.php:183
+#: includes/class-bolt-edit-comments.php:249
 msgid "You cannot resolve comments."
 msgstr ""
 
-#: includes/class-bolt-edit-fields.php:120 includes/class-bolt-edit-plugin.php:87
+#: includes/class-bolt-edit-dev.php:118
+msgid "Dev"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:119
+msgid "Copied"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:120
+msgid "Copy selector"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:121 includes/class-bolt-edit-plugin.php:224 includes/class-bolt-edit-plugin.php:275
+msgid "Close"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:122
+msgid "Classes"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:124
+msgid "Copy"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:125
+msgid "No classes on this element."
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:126
+msgid "Bolt Edit field"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:127
+msgid "Styling"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:128
+msgid "Font"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:129
+msgid "Size"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:130
+msgid "Colour"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:131
+msgid "Hard-coded in the CSS"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:132
+msgid "Browser default"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:133
+msgid "from"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:134
+msgid "Consistency check"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:135 includes/class-bolt-edit-plugin.php:204
+msgid "Done"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:136
+msgid "Hide results"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:137
+msgid "Framework class"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:138
+msgid "Uses variables"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:139
+msgid "None"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:140
+msgid "Check the whole page"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:141
+msgid "Checking..."
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:142
+msgid "Fonts"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:143
+msgid "Sizes"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:144
+msgid "Colours"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:145
+msgid "Elements to look at"
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:146
+msgid "Some stylesheets come from another domain and cannot be read."
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:147
+msgid "text elements use only variables (or the browser default)."
+msgstr ""
+
+#: includes/class-bolt-edit-dev.php:148
+msgid "Only the first 1500 text elements were checked."
+msgstr ""
+
+#: includes/class-bolt-edit-fields.php:123 includes/class-bolt-edit-plugin.php:112
 msgid "This content field is no longer available."
 msgstr ""
 
-#: includes/class-bolt-edit-fields.php:251
+#: includes/class-bolt-edit-fields.php:254
 msgid "A page-scoped Bolt Edit field was rendered without a page. It is stored as a site-wide field instead."
 msgstr ""
 
-#: includes/class-bolt-edit-fields.php:273
+#: includes/class-bolt-edit-fields.php:276
 msgid "Bolt Edit field IDs may contain lowercase letters, numbers, dots, dashes, and underscores."
 msgstr ""
 
-#: includes/class-bolt-edit-fields.php:341
+#: includes/class-bolt-edit-fields.php:344
 msgid "Choose an image from the Media Library."
 msgstr ""
 
-#: includes/class-bolt-edit-fields.php:363
+#: includes/class-bolt-edit-fields.php:366
 msgid "Add the button text."
 msgstr ""
 
-#: includes/class-bolt-edit-fields.php:371
+#: includes/class-bolt-edit-fields.php:374
 msgid "Add a valid link, such as https://example.com or /contact."
 msgstr ""
 
 #. translators: %d: Maximum number of characters.
-#: includes/class-bolt-edit-fields.php:423
+#: includes/class-bolt-edit-fields.php:426
 #, php-format
 msgid "Keep this text to %d characters or fewer."
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:163
-msgid "Close Bolt Edit"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:164
-msgid "Saved"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:165
+#: includes/class-bolt-edit-plugin.php:206
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:166 includes/template-functions.php:127
+#: includes/class-bolt-edit-plugin.php:207 includes/template-functions.php:127
 msgid "Choose image"
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:167
+#: includes/class-bolt-edit-plugin.php:208
 msgid "Use image"
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:168
-msgid "Post comment"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:169
+#: includes/class-bolt-edit-plugin.php:210
 msgid "Comment posted"
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:170
+#: includes/class-bolt-edit-plugin.php:211
+msgid "Comment updated"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:214
+msgid "edited"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:215 includes/class-bolt-edit-plugin.php:290
+msgid "Delete"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:216
+msgid "Click again to delete"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:217
+msgid "Comment deleted"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:218
 msgid "Write a comment first."
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:171 includes/class-bolt-edit-plugin.php:293
-msgid "Save changes"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:172
+#: includes/class-bolt-edit-plugin.php:220
 msgid "Page section"
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:173
+#: includes/class-bolt-edit-plugin.php:221
 msgid "The original element has changed. This comment is still saved with its page context."
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:174
+#: includes/class-bolt-edit-plugin.php:222
 msgid "Select the text you want to turn into a link first."
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:227
-msgid "Selected element action"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:228
+#: includes/class-bolt-edit-plugin.php:223
 msgid "Edit content"
 msgstr ""
 
+#: includes/class-bolt-edit-plugin.php:226
+msgid "Edit in the editor"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:227 includes/class-bolt-edit-plugin.php:283
+msgid "Edit this content"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:227
+msgid "Editable in the editor"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:228
+msgid "Loading editor..."
+msgstr ""
+
 #: includes/class-bolt-edit-plugin.php:229
-msgid "Leave a comment"
+msgid "Updating..."
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:233
-msgid "Private feedback for your site team. This does not change the page."
+#: includes/class-bolt-edit-plugin.php:230
+msgid "You have unsaved changes. Close without saving?"
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:237
-msgid "Open editor"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:244
-msgid "Formatting"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:247
-msgid "Bold"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:248
-msgid "Italic"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:249 includes/class-bolt-edit-plugin.php:275
-msgid "Link"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:250
-msgid "Bulleted list"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:251
-msgid "Numbered list"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:263 includes/class-bolt-edit-plugin.php:276
-msgid "https://example.com or /contact"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:263
-msgid "Link address"
-msgstr ""
-
-#: includes/class-bolt-edit-plugin.php:265
-msgid "Apply"
+#: includes/class-bolt-edit-plugin.php:231
+msgid "Open in dashboard"
 msgstr ""
 
 #: includes/class-bolt-edit-plugin.php:271
+msgid "Selected element action"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:278
+msgid "Write a comment"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:279
+msgid "Private feedback for your site team. This does not change the page."
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:282
+msgid "You do not have access to edit this. It is managed by another plugin. Ask an administrator if you need to change it."
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:289
+msgid "Edit your comment"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:298
+msgid "Formatting"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:301
+msgid "Bold"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:302
+msgid "Italic"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:303 includes/class-bolt-edit-plugin.php:329
+msgid "Link"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:304
+msgid "Bulleted list"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:305
+msgid "Numbered list"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:317 includes/class-bolt-edit-plugin.php:330
+msgid "https://example.com or /contact"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:317
+msgid "Link address"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:319
+msgid "Apply"
+msgstr ""
+
+#: includes/class-bolt-edit-plugin.php:325
 msgid "Text"
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:284
+#: includes/class-bolt-edit-plugin.php:338
 msgid "Replace image"
 msgstr ""
 
-#: includes/class-bolt-edit-plugin.php:290
-msgid "Close"
+#: includes/class-bolt-edit-seo.php:267
+msgid "SEO title"
+msgstr ""
+
+#: includes/class-bolt-edit-seo.php:269
+msgid "Leave empty to use the page title. The site name is added after it."
+msgstr ""
+
+#: includes/class-bolt-edit-seo.php:272
+msgid "Meta description"
+msgstr ""
+
+#: includes/class-bolt-edit-seo.php:274
+msgid "Leave empty to print no description. Search engines may show their own text."
+msgstr ""
+
+#: includes/class-bolt-edit-spacing.php:167
+msgid "This element cannot be adjusted."
+msgstr ""
+
+#: includes/class-bolt-edit-spacing.php:180
+msgid "Too many adjustments. Fold them into the theme first."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:72
+msgid "View an example"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:130
+msgid "View a page that uses this"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:264
+msgid "Custom template"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:265
+msgid "Not a standard WordPress template name. The theme loads it with its own code."
+msgstr ""
+
+#. translators: %s: template name shown in the page Template menu.
+#: includes/class-bolt-edit-templates.php:280
+#, php-format
+msgid "Page template: %s"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:283
+msgid "No page uses this template yet."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:290
+msgid "Template part"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:291
+msgid "Included by other templates."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:294
+msgid "Header"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:296
+msgid "Footer"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:298
+msgid "Sidebar"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:317
+msgid "Front page"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:324
+msgid "The homepage of the site."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:332
+msgid "Posts page"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:339
+msgid "The page that lists the latest posts."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:347
+msgid "Fallback"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:348
+msgid "Used when no more specific template matches."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:351
+msgid "Used when no more specific template matches. This includes pages that have no template of their own."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:379
+msgid "Taxonomy archive"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:380
+msgid "Category archive"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:381
+msgid "Tag archive"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:382
+msgid "Author archive"
+msgstr ""
+
+#. translators: %s: slug or ID taken from the file name.
+#: includes/class-bolt-edit-templates.php:391
+#, php-format
+msgid "Used for one specific archive: %s."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:406
+msgid "All pages"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:406
+msgid "Every page without a page template or a page-specific file."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:407
+msgid "Single posts and pages"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:407
+msgid "Any single post, page or custom post type without a more specific template."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:408
+msgid "Single posts"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:408
+msgid "Every single post without a more specific template."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:409
+msgid "Archives"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:409
+msgid "Every archive without a more specific template."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:410
+msgid "Category archives"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:410
+msgid "The archive of every category."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:411
+msgid "Tag archives"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:411
+msgid "The archive of every tag."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:412
+msgid "Author archives"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:412
+msgid "The archive of every author."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:413
+msgid "Date archives"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:413
+msgid "Archives by year, month or day."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:414
+msgid "Taxonomy archives"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:414
+msgid "The archive of every custom taxonomy term."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:415
+msgid "Search results"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:415
+msgid "The search results page."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:416
+msgid "Not found"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:416
+msgid "Shown when a URL does not exist."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:417
+msgid "Attachments"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:417
+msgid "The page of a single media file."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:418
+msgid "Embeds"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:418
+msgid "Used when a page of this site is embedded elsewhere."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:449
+msgid "Specific page"
+msgstr ""
+
+#. translators: %s: slug or ID taken from the file name.
+#: includes/class-bolt-edit-templates.php:452
+#, php-format
+msgid "No page with the slug or ID %s exists yet."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:468
+msgid "Single post"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:468
+msgid "Archive"
+msgstr ""
+
+#. translators: %s: name taken from the file name.
+#: includes/class-bolt-edit-templates.php:471
+#, php-format
+msgid "No post type named %s is registered."
+msgstr ""
+
+#. translators: %s: singular name of the post type.
+#: includes/class-bolt-edit-templates.php:483
+#, php-format
+msgid "Single: %s"
+msgstr ""
+
+#. translators: %d: number of published items.
+#: includes/class-bolt-edit-templates.php:488
+#, php-format
+msgid "%d published"
+msgstr ""
+
+#. translators: 1: singular name of the post type, 2: number of published items, for example 5 published.
+#: includes/class-bolt-edit-templates.php:494
+#, php-format
+msgid "Every single %1$s (%2$s)."
+msgstr ""
+
+#. translators: %s: plural name of the post type.
+#: includes/class-bolt-edit-templates.php:503
+#, php-format
+msgid "Archive: %s"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:508
+msgid "This post type has no archive turned on, so WordPress does not use this file."
+msgstr ""
+
+#. translators: %s: plural name of the post type.
+#: includes/class-bolt-edit-templates.php:516
+#, php-format
+msgid "The archive page for %s."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:528
+msgid "WooCommerce template"
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:531
+msgid "WooCommerce loads this file for its own pages, such as the shop."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:533
+msgid "Used for WooCommerce pages, like the cart, checkout and account. The theme loads this file itself, so those pages are not listed here."
+msgstr ""
+
+#: includes/class-bolt-edit-templates.php:562
+msgid "(no title)"
 msgstr ""
 
 #: includes/class-bolt-edit-updates.php:27 includes/class-bolt-edit-updates.php:44
@@ -803,10 +1967,6 @@ msgstr ""
 msgid "Ready to check GitHub for published releases."
 msgstr ""
 
-#: includes/class-bolt-edit-updates.php:193
-msgid "Plugin updates"
-msgstr ""
-
 #: includes/class-bolt-edit-updates.php:194
 msgid "Installed version:"
 msgstr ""
@@ -825,10 +1985,4 @@ msgstr ""
 
 #: includes/class-bolt-edit-updates.php:201
 msgid "This public repository needs no GitHub token or wp-config.php changes."
-msgstr ""
-
-#. translators: %s: content provider name.
-#: includes/template-functions.php:311
-#, php-format
-msgid "Editable in %s"
 msgstr ""

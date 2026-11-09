@@ -47,7 +47,10 @@ final class Bolt_Edit_Fields {
 		}
 
 		self::$fields[ $id ] = $schema;
-		self::persist_schema( $id, $schema );
+		// Only people who can edit need the saved schema (it checks their saves), so visitors never read or write it.
+		if ( Bolt_Edit_Plugin::can_edit() ) {
+			self::persist_schema( $id, $schema );
+		}
 
 		return array(
 			'id'     => $id,

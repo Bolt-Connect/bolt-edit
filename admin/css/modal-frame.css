@@ -1,0 +1,23 @@
+/* Bolt Edit edit popup: show the WordPress edit screen without the admin around it. */
+html.wp-toolbar { padding-top: 0 !important; }
+body.bolt-edit-modal-frame #wpadminbar,
+body.bolt-edit-modal-frame #adminmenumain,
+body.bolt-edit-modal-frame #wpfooter,
+body.bolt-edit-modal-frame #screen-meta-links,
+body.bolt-edit-modal-frame .woocommerce-layout__header { display: none !important; }
+body.bolt-edit-modal-frame #wpcontent,
+body.bolt-edit-modal-frame #wpfooter { margin-left: 0 !important; }
+body.bolt-edit-modal-frame.bolt-edit-client-admin { --bolt-edit-header-height: 0px; }
+body.bolt-edit-modal-frame .interface-interface-skeleton { top: 0 !important; left: 0 !important; height: 100% !important; }
+body.bolt-edit-modal-frame .edit-post-header__back-button,
+body.bolt-edit-modal-frame .editor-header__back-button,
+body.bolt-edit-modal-frame .edit-post-fullscreen-mode-close { display: none !important; }
+/* Narrow frames hit the mobile layout, which leaves room for an admin bar we hide. */
+body.bolt-edit-modal-frame #wpbody { padding-top: 0 !important; }
+body.bolt-edit-modal-frame #local-storage-notice { display: none !important; }
+
+/* The field the visitor clicked. The rest of the screen stays visible. The outline pulses twice, stays for a while, then fades out. */
+body.bolt-edit-modal-frame .bolt-edit-highlight { outline: 2px solid #6c47ff; outline-offset: 4px; border-radius: 4px; animation: bolt-edit-highlight-pulse 1.6s ease-out 2, bolt-edit-highlight-fade 1s ease-in 10s forwards; }
+@keyframes bolt-edit-highlight-pulse { from { box-shadow: 0 0 0 0 rgba(0, 51, 153, 0.35); } to { box-shadow: 0 0 0 14px rgba(0, 51, 153, 0); } }
+@keyframes bolt-edit-highlight-fade { to { outline-color: transparent; } }
+@media (prefers-reduced-motion: reduce) { body.bolt-edit-modal-frame .bolt-edit-highlight { animation: bolt-edit-highlight-fade 1s ease-in 10s forwards; } }

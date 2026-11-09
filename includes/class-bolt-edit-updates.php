@@ -180,7 +180,7 @@ final class Bolt_Edit_Updates {
         if (!current_user_can('update_plugins')) { wp_die(esc_html__('You cannot check plugin updates.', 'bolt-edit')); }
         check_admin_referer('bolt_edit_check_updates');
         self::release(true); wp_clean_plugins_cache(); wp_update_plugins();
-        wp_safe_redirect(admin_url('admin.php?page=bolt-edit#settings')); exit;
+        wp_safe_redirect(admin_url('admin.php?page=bolt-edit#settings-updates')); exit;
     }
     public static function screen() {
         $cached = get_site_transient(self::cache_key());

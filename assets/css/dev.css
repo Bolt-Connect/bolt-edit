@@ -1,0 +1,605 @@
+/**
+ * Bolt Edit Dev mode: the button in the toolbar, the hover box and the inspector panel.
+ */
+
+.bolt-edit-toolbar__dev {
+	appearance: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	min-height: 40px;
+	margin: 0;
+	padding: 0 16px 0 14px;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	box-shadow: none;
+	color: var(--bolt-edit-ink);
+	cursor: pointer;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.bolt-edit-toolbar__dev .dashicons {
+	width: 16px;
+	height: 16px;
+	color: var(--bolt-edit-accent);
+	font-size: 16px;
+}
+
+.bolt-edit-toolbar__dev:hover,
+.bolt-edit-toolbar__dev:focus-visible {
+	background: transparent;
+	outline: none;
+}
+
+/* The active button turns blue. The rest of the toolbar keeps its normal look in both modes. */
+html.bolt-edit-selection-active .bolt-edit-toolbar,
+html.bolt-edit-dev-active .bolt-edit-toolbar {
+	border-color: rgba(83, 75, 106, 0.18);
+	background: rgba(253, 252, 254, 0.62);
+	box-shadow: 0 16px 38px rgba(33, 26, 52, 0.18), 0 2px 8px rgba(33, 26, 52, 0.08);
+}
+
+html.bolt-edit-selection-active .bolt-edit-toolbar:hover,
+html.bolt-edit-dev-active .bolt-edit-toolbar:hover {
+	background: rgba(253, 252, 254, 0.82);
+}
+
+html.bolt-edit-dev-active .bolt-edit-toolbar__dev,
+html.bolt-edit-dev-active .bolt-edit-toolbar__dev:hover {
+	background: rgba(0, 51, 153, 0.88);
+	color: #fff;
+}
+
+html.bolt-edit-dev-active .bolt-edit-toolbar__dev .dashicons {
+	color: currentcolor;
+}
+
+.bolt-edit-dev-box {
+	position: fixed;
+	z-index: 2147482996;
+	border: 1px dashed var(--bolt-edit-accent);
+	background: rgba(0, 51, 153, 0.1);
+	pointer-events: none;
+}
+
+.bolt-edit-dev-box--pinned {
+	z-index: 2147482997;
+	border: 2px solid var(--bolt-edit-accent);
+	background: rgba(0, 51, 153, 0.16);
+}
+
+.bolt-edit-dev-tag {
+	position: fixed;
+	z-index: 2147482998;
+	max-width: 80vw;
+	padding: 4px 8px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 6px;
+	background: var(--bolt-edit-panel);
+	box-shadow: 0 4px 14px rgba(33, 26, 52, 0.18);
+	color: var(--bolt-edit-ink);
+	font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	pointer-events: none;
+}
+
+.bolt-edit-dev-panel {
+	position: fixed;
+	z-index: 2147482999;
+	top: 48px;
+	right: 16px;
+	width: 340px;
+	max-width: calc(100vw - 32px);
+	max-height: calc(100vh - 120px);
+	overflow: auto;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 12px;
+	background: var(--bolt-edit-panel);
+	box-shadow: 0 16px 38px rgba(33, 26, 52, 0.22), 0 2px 8px rgba(33, 26, 52, 0.08);
+	color: var(--bolt-edit-body);
+}
+
+.bolt-edit-dev-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--bolt-edit-border);
+}
+
+.bolt-edit-dev-title {
+	min-width: 0;
+	overflow: hidden;
+	color: var(--bolt-edit-ink);
+	font: 700 18px/1.3 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.bolt-edit-dev-tools {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.bolt-edit-dev-link,
+.bolt-edit-dev-close {
+	appearance: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--bolt-edit-accent);
+	cursor: pointer;
+	font: inherit;
+	font-size: 12px;
+}
+
+.bolt-edit-dev-close {
+	color: var(--bolt-edit-muted);
+	font-size: 20px;
+	line-height: 1;
+}
+
+.bolt-edit-dev-link:hover,
+.bolt-edit-dev-close:hover {
+	color: var(--bolt-edit-accent-hover);
+}
+
+.bolt-edit-dev-section {
+	padding: 16px;
+	border-bottom: 1px solid var(--bolt-edit-border);
+}
+
+.bolt-edit-dev-section:last-child {
+	border-bottom: 0;
+}
+
+.bolt-edit-dev-label {
+	margin: 0 0 12px;
+	color: var(--bolt-edit-ink);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.bolt-edit-dev-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.bolt-edit-dev-chip {
+	appearance: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	padding: 6px 10px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 999px;
+	background: var(--bolt-edit-subtle);
+	color: var(--bolt-edit-ink);
+	cursor: pointer;
+	font: 12px/1.2 ui-monospace, Menlo, Consolas, monospace;
+	text-align: left;
+}
+
+.bolt-edit-dev-chip:hover,
+.bolt-edit-dev-chip:focus-visible {
+	border-color: var(--bolt-edit-accent);
+	color: var(--bolt-edit-accent);
+	outline: none;
+}
+
+.bolt-edit-dev-chip .dashicons {
+	width: 14px;
+	height: 14px;
+	color: var(--bolt-edit-muted);
+	font-size: 14px;
+}
+
+.bolt-edit-dev-chip:hover .dashicons,
+.bolt-edit-dev-chip:focus-visible .dashicons {
+	color: var(--bolt-edit-accent);
+}
+
+.bolt-edit-dev-chip--framework {
+	border-color: var(--bolt-edit-accent);
+	background: var(--bolt-edit-panel);
+	color: var(--bolt-edit-accent);
+}
+
+.bolt-edit-dev-row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+	margin-top: 14px;
+}
+
+.bolt-edit-dev-label + .bolt-edit-dev-row {
+	margin-top: 0;
+}
+
+.bolt-edit-dev-key {
+	color: var(--bolt-edit-muted);
+	font-size: 13px;
+}
+
+.bolt-edit-dev-val {
+	color: var(--bolt-edit-ink);
+	font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
+	text-align: right;
+}
+
+.bolt-edit-dev-note {
+	margin: 4px 0 0;
+	color: var(--bolt-edit-muted);
+	font-size: 13px;
+}
+
+.bolt-edit-dev-muted {
+	margin: 0;
+	color: var(--bolt-edit-muted);
+	font-size: 13px;
+}
+
+.bolt-edit-dev-result p {
+	margin: 0 0 6px;
+	font-size: 13px;
+}
+
+.bolt-edit-dev-result .bolt-edit-dev-row {
+	margin-top: 10px;
+}
+
+.bolt-edit-dev-result .bolt-edit-dev-label {
+	margin: 22px 0 12px;
+	font-size: 13px;
+}
+
+.bolt-edit-dev-result .bolt-edit-dev-note {
+	margin-top: 14px;
+}
+
+.bolt-edit-dev-line {
+	margin: 12px 0 0;
+	color: var(--bolt-edit-body);
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.bolt-edit-dev-label + .bolt-edit-dev-line {
+	margin-top: 0;
+}
+
+.bolt-edit-dev-line--hard {
+	color: var(--bolt-edit-ink);
+	font-weight: 400;
+}
+
+.bolt-edit-dev-line--ok {
+	color: var(--bolt-edit-muted);
+}
+
+.bolt-edit-dev-result {
+	margin-top: 12px;
+}
+
+.bolt-edit-dev-result .bolt-edit-dev-line {
+	margin: 0 0 6px;
+}
+
+/* Class chips with a copy button and a switch button */
+.bolt-edit-dev-classbox,
+.bolt-edit-dev-chips--switch {
+	position: relative;
+}
+
+.bolt-edit-dev-chip--split {
+	gap: 2px;
+	padding: 3px 4px 3px 10px;
+	cursor: default;
+}
+
+.bolt-edit-dev-chip--split.is-changed {
+	border-color: var(--bolt-edit-accent);
+	background: rgba(0, 51, 153, 0.1);
+}
+
+.bolt-edit-dev-chip-name {
+	padding-right: 4px;
+}
+
+.bolt-edit-dev-chip-tool {
+	appearance: none;
+	display: inline-grid;
+	place-items: center;
+	width: 24px;
+	height: 24px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: none;
+	color: var(--bolt-edit-muted);
+	cursor: pointer;
+}
+
+.bolt-edit-dev-chip-tool:hover,
+.bolt-edit-dev-chip-tool:focus-visible,
+.bolt-edit-dev-chip-tool[aria-expanded='true'] {
+	background: rgba(0, 51, 153, 0.1);
+	color: var(--bolt-edit-accent);
+	outline: none;
+}
+
+.bolt-edit-dev-chip-tool .dashicons {
+	width: 14px;
+	height: 14px;
+	color: inherit;
+	font-size: 14px;
+}
+
+.bolt-edit-dev-menu {
+	position: absolute;
+	z-index: 5;
+	top: calc(100% + 6px);
+	left: 0;
+	min-width: 210px;
+	max-height: 270px;
+	overflow: auto;
+	padding: 6px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 10px;
+	background: var(--bolt-edit-panel);
+	box-shadow: 0 10px 28px rgba(33, 26, 52, 0.2);
+}
+
+.bolt-edit-dev-panel .bolt-edit-dev-menu-search {
+	box-sizing: border-box;
+	width: 100%;
+	height: 30px;
+	margin: 0 0 6px;
+	padding: 0 8px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 8px;
+	background: var(--bolt-edit-panel);
+	color: var(--bolt-edit-ink);
+	font: 12px ui-monospace, Menlo, Consolas, monospace;
+}
+
+.bolt-edit-dev-opt {
+	appearance: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	width: 100%;
+	margin: 0;
+	padding: 6px 8px;
+	border: 0;
+	border-radius: 6px;
+	background: none;
+	color: var(--bolt-edit-ink);
+	cursor: pointer;
+	font: 12px ui-monospace, Menlo, Consolas, monospace;
+	text-align: left;
+}
+
+.bolt-edit-dev-opt:hover,
+.bolt-edit-dev-opt:focus-visible {
+	background: rgba(0, 51, 153, 0.1);
+	outline: none;
+}
+
+.bolt-edit-dev-opt[aria-selected='true'] {
+	color: var(--bolt-edit-accent);
+	font-weight: 700;
+}
+
+.bolt-edit-dev-opt small {
+	color: var(--bolt-edit-muted);
+	font: 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.bolt-edit-dev-swapbar {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+	margin-top: 12px;
+}
+
+.bolt-edit-dev-swapnote b {
+	color: var(--bolt-edit-ink);
+	font: 600 12px ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* The Result: rows with the variable as a tooltip */
+.bolt-edit-dev-row--tip {
+	margin-top: 8px;
+}
+
+.bolt-edit-dev-row--tip.is-copyable {
+	cursor: pointer;
+}
+
+.bolt-edit-dev-row--tip.is-copyable:hover .bolt-edit-dev-key {
+	color: var(--bolt-edit-accent);
+}
+
+.bolt-edit-dev-row--tip ~ .bolt-edit-dev-note {
+	margin-top: 12px;
+}
+
+.bolt-edit-dev-swatch {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-right: 6px;
+	border: 1px solid var(--bolt-edit-border);
+	border-radius: 50%;
+	vertical-align: -1px;
+}
+/* Class chip: click the name to copy, pencil to edit */
+.bolt-edit-dev-chip--split .bolt-edit-dev-chip-name {
+	appearance: none;
+	margin: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+}
+
+.bolt-edit-dev-chip--split .bolt-edit-dev-chip-name:hover,
+.bolt-edit-dev-chip--split .bolt-edit-dev-chip-name:focus-visible {
+	text-decoration: underline;
+	outline: none;
+}
+
+.bolt-edit-dev-chip--split .bolt-edit-dev-chip-name.is-copied {
+	color: var(--bolt-edit-accent);
+}
+
+/* Class chips: all the same height, no extra space left of the name */
+.bolt-edit-dev-chip--split {
+	box-sizing: border-box;
+	min-height: 32px;
+	align-items: center;
+	padding: 3px 4px 3px 12px;
+}
+
+.bolt-edit-dev-chip--split:not(:has(.bolt-edit-dev-chip-tool)) {
+	padding-right: 12px;
+}
+
+.bolt-edit-dev-chip--split .bolt-edit-dev-chip-name {
+	padding: 0 4px 0 0;
+	line-height: 1.4;
+}
+
+.bolt-edit-dev-chip--split:not(:has(.bolt-edit-dev-chip-tool)) .bolt-edit-dev-chip-name {
+	padding-right: 0;
+}
+
+/* Class list: a chip, then the CSS it sets */
+.bolt-edit-dev-classlist {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+}
+
+.bolt-edit-dev-classitem {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.bolt-edit-dev-chiprow {
+	position: relative;
+	display: flex;
+}
+
+.bolt-edit-dev-swapcount {
+	color: var(--bolt-edit-ink);
+	font-size: 13px;
+}
+
+/* One button look: a pill with the accent colour */
+.bolt-edit-dev-pill {
+	appearance: none;
+	display: inline-flex;
+	align-items: center;
+	margin: 0;
+	padding: 5px 12px;
+	border: 1px solid var(--bolt-edit-accent);
+	border-radius: 999px;
+	background: var(--bolt-edit-panel);
+	color: var(--bolt-edit-accent);
+	cursor: pointer;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.3;
+	text-decoration: none;
+}
+
+.bolt-edit-dev-pill:hover,
+.bolt-edit-dev-pill:focus-visible {
+	background: var(--bolt-edit-accent);
+	color: #fff;
+	outline: none;
+}
+
+.bolt-edit-dev-result .bolt-edit-dev-pill {
+	margin-top: 10px;
+}
+
+/* Up and down buttons on the selection */
+.bolt-edit-dev-nav {
+	position: absolute;
+	left: -2px;
+	top: -34px;
+	display: flex;
+	gap: 4px;
+	pointer-events: auto;
+}
+
+.bolt-edit-dev-box--pinned.is-top .bolt-edit-dev-nav {
+	left: 4px;
+	top: 4px;
+}
+
+.bolt-edit-dev-navbtn {
+	appearance: none;
+	display: inline-grid;
+	place-items: center;
+	width: 28px;
+	height: 28px;
+	margin: 0;
+	padding: 0;
+	border: 1px solid var(--bolt-edit-accent);
+	border-radius: 50%;
+	background: var(--bolt-edit-panel);
+	box-shadow: 0 4px 14px rgba(33, 26, 52, 0.18);
+	color: var(--bolt-edit-accent);
+	cursor: pointer;
+}
+
+.bolt-edit-dev-navbtn[hidden] {
+	display: none;
+}
+
+.bolt-edit-dev-navbtn:hover,
+.bolt-edit-dev-navbtn:focus-visible {
+	background: var(--bolt-edit-accent);
+	color: #fff;
+	outline: none;
+}
+
+.bolt-edit-dev-navbtn .dashicons {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+}
+
+.bolt-edit-dev-panel .bolt-edit-dev-head {
+	cursor: grab;
+	touch-action: none;
+	user-select: none;
+}
+
+.bolt-edit-dev-panel.is-dragging,
+.bolt-edit-dev-panel.is-dragging .bolt-edit-dev-head {
+	cursor: grabbing;
+}

@@ -75,7 +75,7 @@ final class Bolt_Edit_Activity {
 		);
 
 		if ( $table_name === $table_exists ) {
-			update_option( 'bolt_edit_activity_db_version', self::DB_VERSION, false );
+			update_option( 'bolt_edit_activity_db_version', self::DB_VERSION, true );
 		}
 	}
 

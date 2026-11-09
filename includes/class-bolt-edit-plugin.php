@@ -9,6 +9,11 @@ defined( 'ABSPATH' ) || exit;
 
 final class Bolt_Edit_Plugin {
 	/**
+	 * User meta key: show hidden states (elements with the bolt-edit-reveal class) while editing.
+	 */
+	const SHOW_HIDDEN_META = 'bolt_edit_show_hidden';
+
+	/**
 	 * Register plugin hooks.
 	 *
 	 * @return void
@@ -17,21 +22,41 @@ final class Bolt_Edit_Plugin {
 		add_action( 'rest_api_init', array( __CLASS__, 'register_rest_routes' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_editor_assets' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'render_editor' ), 5 );
+		add_filter( 'body_class', array( __CLASS__, 'body_class' ) );
+	}
+
+	/**
+	 * Whether the current user chose to show hidden states.
+	 *
+	 * @return bool
+	 */
+	public static function show_hidden() {
+		return (bool) get_user_meta( get_current_user_id(), self::SHOW_HIDDEN_META, true );
+	}
+
+	/**
+	 * Add bolt-edit-show-hidden to the body for editors who switched hidden states on.
+	 *
+	 * @param string[] $classes Body classes.
+	 * @return string[]
+	 */
+	public static function body_class( $classes ) {
+		if ( self::can_edit() && self::show_hidden() ) {
+			$classes[] = 'bolt-edit-show-hidden';
+		}
+		return $classes;
 	}
 
 	/**
 	 * Whether the current visitor may use Bolt Edit.
 	 *
-	 * Administrators and Editors by default. Contributors and Authors have
+	 * Administrators and Editors by default, or the roles chosen under Features, Access. Without a choice, Contributors and Authors are left out, as they have
 	 * `edit_posts` but not `edit_pages`, so they are left out.
 	 *
 	 * @return bool
 	 */
 	public static function can_edit() {
-		$can_edit = is_user_logged_in() && ( current_user_can( 'edit_pages' ) || ( Bolt_Edit_Client::enabled() && current_user_can( 'bolt_edit_edit_content' ) ) );
-		if ( Bolt_Edit_Client::is_client() && ! Bolt_Edit_Client::enabled() ) {
-			$can_edit = false;
-		}
+		$can_edit = is_user_logged_in() && Bolt_Edit_Access::allows( wp_get_current_user() );
 
 		/**
 		 * Filter who may open Bolt Edit and save content.
@@ -123,11 +148,24 @@ final class Bolt_Edit_Plugin {
 	}
 
 	/**
+	 * Whether the browser says this page is loaded inside a frame, such as the Bolt Edit popup.
+	 *
+	 * @return bool
+	 */
+	public static function in_iframe() {
+		return isset( $_SERVER['HTTP_SEC_FETCH_DEST'] ) && 'iframe' === strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_SEC_FETCH_DEST'] ) ) );
+	}
+
+	/**
 	 * Load editor-only assets for authorised users.
 	 *
 	 * @return void
 	 */
 	public static function enqueue_editor_assets() {
+		// The popup must never open another popup, so the website editor stays out of frames.
+		if ( self::in_iframe() ) {
+			return;
+		}
 		if ( ! self::can_edit() ) {
 			return;
 		}
@@ -158,23 +196,39 @@ final class Bolt_Edit_Plugin {
 				'pageId'  => get_queried_object_id(),
 				'commentsUrl' => esc_url_raw( rest_url( 'bolt-edit/v1/comments' ) ),
 				'clientMode' => Bolt_Edit_Client::clean_admin(),
+				'popupEditing' => Bolt_Edit_Modal::enabled(),
+				// Swapping a region in place only suits themes that restart their own scripts, so a reload is the default.
+				'regionSwap' => (bool) apply_filters( 'bolt_edit_region_swap', false ),
 				'labels'  => array(
-					'openPencil'  => __( 'Open Bolt Edit', 'bolt-edit' ),
-					'closePencil' => __( 'Close Bolt Edit', 'bolt-edit' ),
+					'openPencil'  => __( 'Edit', 'bolt-edit' ),
+					'closePencil' => Bolt_Edit_Dev::allowed() ? __( 'Edit', 'bolt-edit' ) : __( 'Done', 'bolt-edit' ),
 					'saved'       => __( 'Saved', 'bolt-edit' ),
 					'error'       => __( 'Something went wrong. Please try again.', 'bolt-edit' ),
 					'chooseImage' => __( 'Choose image', 'bolt-edit' ),
 					'useImage'    => __( 'Use image', 'bolt-edit' ),
-					'postComment' => __( 'Post comment', 'bolt-edit' ),
+					'postComment' => __( 'Send', 'bolt-edit' ),
 					'commentSaved' => __( 'Comment posted', 'bolt-edit' ),
+				'commentEdited' => __( 'Comment updated', 'bolt-edit' ),
+				'statusOpen' => __( 'Open', 'bolt-edit' ),
+				'statusResolved' => __( 'Resolved', 'bolt-edit' ),
+				'editedLabel' => __( 'edited', 'bolt-edit' ),
+				'deleteLabel' => __( 'Delete', 'bolt-edit' ),
+				'deleteSure' => __( 'Click again to delete', 'bolt-edit' ),
+				'commentDeleted' => __( 'Comment deleted', 'bolt-edit' ),
 					'writeComment' => __( 'Write a comment first.', 'bolt-edit' ),
-					'saveChanges' => __( 'Save changes', 'bolt-edit' ),
+					'saveChanges' => __( 'Save', 'bolt-edit' ),
 					'section' => __( 'Page section', 'bolt-edit' ),
 					'locationMissing' => __( 'The original element has changed. This comment is still saved with its page context.', 'bolt-edit' ),
 					'selectText'  => __( 'Select the text you want to turn into a link first.', 'bolt-edit' ),
-					'commentOpen' => __( 'Open', 'bolt-edit' ),
-					'commentResolved' => __( 'Resolved', 'bolt-edit' ),
-					'edit'        => __( 'Edit', 'bolt-edit' ),
+					'editContent' => __( 'Edit content', 'bolt-edit' ),
+					'closeEditor' => __( 'Close', 'bolt-edit' ),
+					'save' => __( 'Save', 'bolt-edit' ),
+				'editAdmin' => __( 'Edit in the editor', 'bolt-edit' ),
+				'editManaged' => Bolt_Edit_Modal::enabled() ? __( 'Edit this content', 'bolt-edit' ) : __( 'Editable in the editor', 'bolt-edit' ),
+					'loadingEditor' => __( 'Loading editor...', 'bolt-edit' ),
+					'updating' => __( 'Updating...', 'bolt-edit' ),
+					'discardChanges' => __( 'You have unsaved changes. Close without saving?', 'bolt-edit' ),
+			'openAdmin' => __( 'Open in dashboard', 'bolt-edit' ),
 				),
 			)
 		);
@@ -186,34 +240,23 @@ final class Bolt_Edit_Plugin {
 	 * @return void
 	 */
 	public static function render_editor() {
+		if ( self::in_iframe() ) {
+			return;
+		}
 		if ( ! self::can_edit() ) {
 			return;
 		}
 		?>
 		<div class="bolt-edit-ui bolt-edit-toolbar" data-bolt-edit-toolbar hidden>
 			<button class="bolt-edit-toolbar__select" type="button" data-bolt-edit-toggle aria-pressed="false">
-				<span data-bolt-edit-toggle-label><?php esc_html_e( 'Open Bolt Edit', 'bolt-edit' ); ?></span>
+				<span data-bolt-edit-toggle-label><?php esc_html_e( 'Edit', 'bolt-edit' ); ?></span>
 				<span class="dashicons dashicons-edit" aria-hidden="true"></span>
 			</button>
 		</div>
-		<?php if ( Bolt_Edit_Client::clean_admin() ) : ?>
-			<a class="bolt-edit-ui bolt-edit-client-logout" href="<?php echo esc_url( wp_logout_url( Bolt_Edit_Client::logged_out_url() ) ); ?>"><?php esc_html_e( 'Log out', 'bolt-edit' ); ?></a>
-		<?php endif; ?>
 
 		<div class="bolt-edit-ui bolt-edit-status" data-bolt-edit-status role="status" aria-live="polite" hidden></div>
 
-		<div class="bolt-edit-ui bolt-edit-highlight" data-bolt-edit-highlight hidden>
-			<div class="bolt-edit-highlight__label">
-				<span class="bolt-edit-highlight__text" data-bolt-edit-highlight-label></span>
-				<a
-					class="bolt-edit-highlight__action"
-					data-bolt-edit-managed-edit
-					href="#"
-
-					hidden
-				></a>
-			</div>
-		</div>
+		<div class="bolt-edit-ui bolt-edit-highlight" data-bolt-edit-highlight hidden></div>
 
 		<div
 			class="bolt-edit-ui bolt-edit-popup"
@@ -224,19 +267,30 @@ final class Bolt_Edit_Plugin {
 		>
 			<form data-bolt-edit-form>
 				<div class="bolt-edit-popup__label" id="bolt-edit-popup-title" data-bolt-edit-popup-label></div>
-				<div class="bolt-edit-popup__switch" role="tablist" aria-label="<?php esc_attr_e( 'Selected element action', 'bolt-edit' ); ?>">
-					<button type="button" role="tab" aria-selected="true" data-bolt-edit-mode="edit"><?php esc_html_e( 'Edit content', 'bolt-edit' ); ?></button>
-					<button type="button" role="tab" aria-selected="false" data-bolt-edit-mode="comment"><?php esc_html_e( 'Leave a comment', 'bolt-edit' ); ?></button>
+				<div class="bolt-edit-popup__header">
+					<div class="bolt-edit-popup__switch" role="tablist" aria-label="<?php esc_attr_e( 'Selected element action', 'bolt-edit' ); ?>">
+						<button type="button" role="tab" aria-selected="true" data-bolt-edit-mode="edit"><span class="dashicons dashicons-edit" aria-hidden="true"></span><?php esc_html_e( 'Edit', 'bolt-edit' ); ?></button>
+						<button type="button" role="tab" aria-selected="false" data-bolt-edit-mode="comment"><span class="dashicons dashicons-admin-comments" aria-hidden="true"></span><?php esc_html_e( 'Comment', 'bolt-edit' ); ?></button>
+					</div>
+					<button class="bolt-edit-popup__close" type="button" data-bolt-edit-cancel aria-label="<?php esc_attr_e( 'Close', 'bolt-edit' ); ?>"><span class="dashicons dashicons-no-alt" aria-hidden="true"></span></button>
 				</div>
 				<div class="bolt-edit-popup__comment" data-bolt-edit-comment-editor hidden>
-					<label class="bolt-edit-popup__field"><span class="bolt-edit-popup__field-label"><?php esc_html_e( 'Comment', 'bolt-edit' ); ?></span><textarea class="bolt-edit-popup__input" rows="4" maxlength="5000" data-bolt-edit-comment-input></textarea></label>
+					<textarea class="bolt-edit-popup__input" rows="4" maxlength="5000" placeholder="<?php esc_attr_e( 'Write a comment', 'bolt-edit' ); ?>" aria-label="<?php esc_attr_e( 'Comment', 'bolt-edit' ); ?>" data-bolt-edit-comment-input></textarea>
 					<p class="bolt-edit-popup__hint"><?php esc_html_e( 'Private feedback for your site team. This does not change the page.', 'bolt-edit' ); ?></p>
 				</div>
 				<div class="bolt-edit-popup__managed" data-bolt-edit-managed-editor hidden>
-					<p class="bolt-edit-popup__hint" data-bolt-edit-managed-description></p>
-					<a class="bolt-edit-popup__button bolt-edit-popup__button--primary" data-bolt-edit-popup-managed-link href="#"><?php esc_html_e( 'Open editor', 'bolt-edit' ); ?></a>
+					<p class="bolt-edit-popup__hint bolt-edit-popup__noaccess" data-bolt-edit-popup-noaccess role="status" hidden><?php esc_html_e( 'You do not have access to edit this. It is managed by another plugin. Ask an administrator if you need to change it.', 'bolt-edit' ); ?></p>
+					<a class="bolt-edit-popup__managed-field" data-bolt-edit-popup-managed-link href="#"><span data-bolt-edit-popup-managed-text><?php esc_html_e( 'Edit this content', 'bolt-edit' ); ?></span><span class="dashicons dashicons-edit" aria-hidden="true"></span></a>
 				</div>
-				<div class="bolt-edit-popup__comment" data-bolt-edit-comment-detail hidden><p data-bolt-edit-comment-author class="bolt-edit-popup__hint"></p><p data-bolt-edit-comment-body class="bolt-edit-popup__note"></p></div>
+				<div class="bolt-edit-popup__comment bolt-edit-popup__detail" data-bolt-edit-comment-detail hidden>
+					<div class="bolt-edit-popup__who"><span class="bolt-edit-popup__avatar" data-bolt-edit-comment-avatar aria-hidden="true"></span><span><strong data-bolt-edit-comment-author></strong><small data-bolt-edit-comment-meta></small></span></div>
+					<p data-bolt-edit-comment-body class="bolt-edit-popup__note"></p>
+					<div class="bolt-edit-popup__edit" data-bolt-edit-comment-edit-form hidden>
+						<textarea class="bolt-edit-popup__input" rows="4" maxlength="5000" aria-label="<?php esc_attr_e( 'Edit your comment', 'bolt-edit' ); ?>" data-bolt-edit-comment-edit-input></textarea>
+						<div class="bolt-edit-popup__edit-actions"><button type="button" class="bolt-edit-popup__button bolt-edit-popup__button--quiet" data-bolt-edit-comment-delete><?php esc_html_e( 'Delete', 'bolt-edit' ); ?></button><button type="button" class="bolt-edit-popup__button bolt-edit-popup__button--primary" data-bolt-edit-comment-edit-save><?php esc_html_e( 'Save', 'bolt-edit' ); ?></button></div>
+					</div>
+					<button type="button" class="bolt-edit-popup__link" data-bolt-edit-comment-edit hidden><?php esc_html_e( 'Edit', 'bolt-edit' ); ?></button>
+				</div>
 				<div data-bolt-edit-text-editor>
 					<textarea class="bolt-edit-popup__input" id="bolt-edit-popup-value" name="value" rows="1" wrap="soft" autocomplete="off" aria-labelledby="bolt-edit-popup-title" data-bolt-edit-input></textarea>
 				</div>
@@ -286,11 +340,8 @@ final class Bolt_Edit_Plugin {
 				</div>
 				<p class="bolt-edit-popup__error" data-bolt-edit-error hidden></p>
 				<div class="bolt-edit-popup__actions">
-					<button class="bolt-edit-popup__button bolt-edit-popup__button--quiet" type="button" data-bolt-edit-cancel>
-						<?php esc_html_e( 'Close', 'bolt-edit' ); ?>
-					</button>
 					<button class="bolt-edit-popup__button bolt-edit-popup__button--primary" type="submit" data-bolt-edit-save>
-						<?php esc_html_e( 'Save changes', 'bolt-edit' ); ?>
+						<?php esc_html_e( 'Save', 'bolt-edit' ); ?>
 					</button>
 				</div>
 			</form>
@@ -304,7 +355,7 @@ final class Bolt_Edit_Plugin {
 	 * @param string $relative_path Plugin-relative path.
 	 * @return string
 	 */
-	private static function asset_version( $relative_path ) {
+	public static function asset_version( $relative_path ) {
 		$path = BOLT_EDIT_PLUGIN_PATH . $relative_path;
 
 		return file_exists( $path ) ? (string) filemtime( $path ) : BOLT_EDIT_VERSION;

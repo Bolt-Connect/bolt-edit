@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bolt Edit
  * Description: Frontend content editing for AI-built WordPress themes. The theme owns the design, your client edits the words and images.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Plugin URI: https://boltconnect.nl
  * Update URI: https://github.com/Bolt-Connect/bolt-edit/
  * Author: Bolt Connect
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'BOLT_EDIT_VERSION', '1.0.0' );
+define( 'BOLT_EDIT_VERSION', '1.1.0' );
 define( 'BOLT_EDIT_PLUGIN_FILE', __FILE__ );
 define( 'BOLT_EDIT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BOLT_EDIT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -25,13 +25,27 @@ define( 'BOLT_EDIT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'BOLT_EDIT_SUPPORT_URL', 'https://boltconnect.nl' );
 
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-fields.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-templates.php';
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-activity.php';
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-admin.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/admin/class-bolt-edit-admin-ui.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/admin/class-bolt-edit-admin-changelog.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/admin/class-bolt-edit-admin-templates.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/admin/class-bolt-edit-admin-features.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/admin/class-bolt-edit-admin-get-started.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/admin/class-bolt-edit-admin-about.php';
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-plugin.php';
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/template-functions.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-access.php';
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-client.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-dev.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-spacing.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-classes.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-modal.php';
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-comments.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-seo.php';
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-abilities.php';
+require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-ai-instructions.php';
 
 /**
  * Load the Dutch translation for every Dutch WordPress locale (nl_NL, nl_BE,
@@ -62,8 +76,15 @@ Bolt_Edit_Activity::init();
 Bolt_Edit_Admin::init();
 Bolt_Edit_Plugin::init();
 Bolt_Edit_Client::init();
+Bolt_Edit_Dev::init();
+Bolt_Edit_Spacing::init();
+Bolt_Edit_Classes::init();
+Bolt_Edit_Modal::init();
 Bolt_Edit_Comments::init();
+Bolt_Edit_SEO::init();
 Bolt_Edit_Abilities::init();
+Bolt_Edit_AI_Instructions::init();
+
 
 require_once BOLT_EDIT_PLUGIN_PATH . 'includes/class-bolt-edit-updates.php';
 Bolt_Edit_Updates::boot();

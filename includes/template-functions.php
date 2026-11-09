@@ -290,30 +290,15 @@ if ( ! function_exists( 'bolt_edit_image' ) ) {
 
 if ( ! function_exists( 'bolt_edit_managed_region_open' ) ) {
 	/**
-	 * Open a read-only region owned by ACF or another content provider.
+	 * Open a region owned by another content system, such as custom fields or a shop.
 	 *
 	 * @param array $args Managed-region settings.
 	 * @return void
 	 */
 	function bolt_edit_managed_region_open( $args = array() ) {
 		$provider = isset( $args['provider'] ) ? sanitize_key( $args['provider'] ) : 'provider';
-		$names    = array(
-			'acf'         => 'ACF',
-			'jetengine'   => 'JetEngine',
-			'woocommerce' => 'WooCommerce',
-			'wordpress'   => 'WordPress',
-		);
-		$name     = isset( $names[ $provider ] ) ? $names[ $provider ] : ucfirst( $provider );
-		$label    = isset( $args['label'] ) && $args['label']
-			? sanitize_text_field( $args['label'] )
-			: sprintf(
-				/* translators: %s: content provider name. */
-				__( 'Editable in %s', 'bolt-edit' ),
-				$name
-			);
-		$action_label = isset( $args['action_label'] ) && $args['action_label']
-			? sanitize_text_field( $args['action_label'] )
-			: __( 'Edit', 'bolt-edit' );
+		$label    = isset( $args['label'] ) ? sanitize_text_field( $args['label'] ) : '';
+		$field    = isset( $args['field'] ) ? preg_replace( '/[^A-Za-z0-9_:,\[\]-]/', '', (string) $args['field'] ) : '';
 		$classes  = array( 'bolt-edit-managed-region' );
 
 		if ( ! empty( $args['class'] ) ) {
@@ -327,8 +312,10 @@ if ( ! function_exists( 'bolt_edit_managed_region_open' ) ) {
 			class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 			<?php if ( Bolt_Edit_Plugin::can_edit() ) : ?>
 				data-bolt-edit-managed="<?php echo esc_attr( $provider ); ?>"
-				data-bolt-edit-managed-label="<?php echo esc_attr( $label ); ?>"
-				data-bolt-edit-managed-action-label="<?php echo esc_attr( $action_label ); ?>"
+				<?php echo $label ? 'data-bolt-edit-managed-label="' . esc_attr( $label ) . '"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above. ?>
+				<?php if ( '' !== $field ) : ?>
+					data-bolt-edit-managed-field="<?php echo esc_attr( $field ); ?>"
+				<?php endif; ?>
 				<?php if ( ! empty( $args['edit_url'] ) ) : ?>
 					data-bolt-edit-managed-edit-url="<?php echo esc_url( $args['edit_url'] ); ?>"
 				<?php endif; ?>
@@ -348,3 +335,11 @@ if ( ! function_exists( 'bolt_edit_managed_region_close' ) ) {
 		echo '</div>';
 	}
 }
+
+if ( ! function_exists( 'bolt_edit_cleanup_prompt' ) ) {
+	/** The clean-up prompt for an AI agent, so a theme can show it (for example on its brand guide). Empty when Dev mode is not available. */
+	function bolt_edit_cleanup_prompt() {
+		return class_exists( 'Bolt_Edit_Dev' ) ? Bolt_Edit_Dev::master_prompt() : '';
+	}
+}
+

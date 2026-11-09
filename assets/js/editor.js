@@ -7,8 +7,6 @@
 	const toggle = document.querySelector( '[data-bolt-edit-toggle]' );
 	const status = document.querySelector( '[data-bolt-edit-status]' );
 	const highlight = document.querySelector( '[data-bolt-edit-highlight]' );
-	const highlightLabel = document.querySelector( '[data-bolt-edit-highlight-label]' );
-	const managedEdit = document.querySelector( '[data-bolt-edit-managed-edit]' );
 	const popup = document.querySelector( '[data-bolt-edit-popup]' );
 	const popupLabel = document.querySelector( '[data-bolt-edit-popup-label]' );
 	const form = document.querySelector( '[data-bolt-edit-form]' );
@@ -33,7 +31,7 @@
 	if (
 
 		! window.boltEditEditor ||
-		! toolbar || ! toggle || ! highlight || ! highlightLabel || ! managedEdit || ! popup || ! form ||
+		! toolbar || ! toggle || ! highlight || ! popup || ! form ||
 		! textEditor || ! richtextEditor || ! richtextInput || ! linkRow || ! buttonEditor || ! imageEditor
 	) {
 		return;
@@ -44,6 +42,10 @@
 	const commentInput = popup.querySelector( '[data-bolt-edit-comment-input]' );
 	const managedEditor = popup.querySelector( '[data-bolt-edit-managed-editor]' );
 	const popupManagedLink = popup.querySelector( '[data-bolt-edit-popup-managed-link]' );
+	const popupManagedText = popup.querySelector( '[data-bolt-edit-popup-managed-text]' );
+	const popupNoAccess = popup.querySelector( '[data-bolt-edit-popup-noaccess]' );
+	// An image needs the media library, which needs the room of the big popup.
+	const isImageRegion = ( region ) => Boolean( region && region.querySelector( 'img' ) && ( region.innerText || '' ).replace( /\s+/g, '' ).length < 3 );
 	const commentDetail = popup.querySelector( '[data-bolt-edit-comment-detail]' );
 	let popupMode = 'edit';
 	let commentTarget = null;
@@ -51,8 +53,7 @@
 	let comments = [];
 	const markerLayer = document.createElement( 'div' );
 	markerLayer.className = 'bolt-edit-ui bolt-edit-markers';
-	markerLayer.hidden = true;
-	document.body.append( markerLayer );
+		document.body.append( markerLayer );
 
 	const editors = {
 		text: textEditor,
@@ -63,27 +64,33 @@
 
 	let active = false;
 	let selectedField = null;
+	let highlightedTarget = null;
 	let statusTimer = null;
 	let pendingAttachmentId = 0;
 	let lastRange = null;
 	let linkRange = null;
 	const labels = {
-		openPencil: 'Open Bolt Edit',
-		closePencil: 'Close Bolt Edit',
+		openPencil: 'Edit',
+		closePencil: 'Done',
 		saved: 'Saved',
 		error: 'Something went wrong. Please try again.',
 		chooseImage: 'Choose image',
 		useImage: 'Use image',
-		postComment: 'Post comment',
+		postComment: 'Send',
 		commentSaved: 'Comment posted',
 		writeComment: 'Write a comment first.',
-		saveChanges: 'Save changes',
+		saveChanges: 'Save',
 		section: 'Page section',
 		locationMissing: 'The original element has changed. This comment is still saved with its page context.',
 		selectText: 'Select the text you want to turn into a link first.',
-		commentOpen: 'Open',
-		commentResolved: 'Resolved',
-		edit: 'Edit',
+		editContent: 'Edit content',
+		closeEditor: 'Close',
+		save: 'Save',
+		editManaged: 'Edit this content',
+		loadingEditor: 'Loading editor...',
+		updating: 'Updating...',
+		discardChanges: 'You have unsaved changes. Close without saving?',
+		openAdmin: 'Open in dashboard',
 		...( window.boltEditEditor.labels || {} ),
 	};
 
@@ -135,21 +142,15 @@
 			return;
 		}
 
+		highlightedTarget = target;
 		const rect = target.getBoundingClientRect();
-		const isManaged = target.hasAttribute( 'data-bolt-edit-managed' );
-		const editUrl = isManaged ? clientEditUrl( target.dataset.boltEditManagedEditUrl || '' ) : '';
 
 		highlight.style.left = `${ Math.max( 0, rect.left - 5 ) }px`;
 		highlight.style.top = `${ Math.max( 0, rect.top - 5 ) }px`;
 		highlight.style.width = `${ rect.width + 10 }px`;
 		highlight.style.height = `${ rect.height + 10 }px`;
-		highlightLabel.textContent = targetLabel( target );
-		managedEdit.hidden = ! editUrl;
-		managedEdit.href = editUrl || '#';
-		managedEdit.textContent = editUrl ? target.dataset.boltEditManagedActionLabel : '';
-		highlight.classList.toggle( 'bolt-edit-highlight--managed', isManaged );
-		highlight.classList.toggle( 'bolt-edit-highlight--with-action', Boolean( editUrl ) );
-		highlight.classList.toggle( 'bolt-edit-highlight--label-inside', rect.top < 40 );
+		// Purple means you can type here. Gray means the content is edited in a popup or can only be commented on.
+		highlight.classList.toggle( 'bolt-edit-highlight--indirect', ! target.hasAttribute( 'data-bolt-edit-field' ) );
 		highlight.hidden = false;
 	};
 
@@ -347,7 +348,8 @@
 
 	const closePopup = () => {
 		popup.hidden = true;
-		popup.classList.remove( 'bolt-edit-popup--wide' );
+		popup.classList.remove( 'bolt-edit-popup--wide', 'bolt-edit-popup--detail' );
+		save.disabled = false;
 		const focusTarget = selectedField;
 		selectedField = null;
 		commentTarget = null;
@@ -449,7 +451,6 @@
 			field.tabIndex = active ? 0 : -1;
 		} );
 
-		markerLayer.hidden = ! active;
 		renderMarkers();
 		if ( ! active ) {
 			closePopup();
@@ -591,6 +592,249 @@
 		} catch ( e ) { return ''; }
 	};
 
+	/*
+	 * Provider editors in a popup.
+	 *
+	 * The edit screen opens in a frame on top of the page. After a save, only the
+	 * managed regions that belong to it are swapped. If that fails, the page reloads
+	 * and returns to the same scroll position.
+	 */
+
+	const popupEditing = Boolean( window.boltEditEditor.popupEditing );
+	const restoreKey = 'bolt-edit-restore';
+	let editModal = null;
+	let modalTrigger = null;
+	let modalSaved = false;
+	let modalDirty = false;
+	let modalSaving = false;
+
+	// What the clicked region shows, so the popup can find the matching field in the edit screen by itself.
+	const regionHint = ( region ) => {
+		const hint = { text: '', image: '' };
+		if ( ! region ) { return hint; }
+		hint.text = ( region.innerText || region.textContent || '' ).replace( /\s+/g, ' ' ).trim().slice( 0, 200 );
+		const img = region.querySelector( 'img' );
+		if ( img ) {
+			try { hint.image = decodeURIComponent( new URL( img.currentSrc || img.src, window.location.href ).pathname.split( '/' ).pop() ); } catch ( e ) { /* No image hint. */ }
+		}
+		return hint;
+	};
+
+	const frameUrl = ( value, field, hint ) => {
+		try {
+			const url = new URL( value, window.location.href );
+			if ( url.origin !== window.location.origin || ! url.pathname.includes( '/wp-admin/' ) ) { return ''; }
+			url.searchParams.delete( 'bolt_edit_return' );
+			url.searchParams.set( 'bolt_edit_modal', '1' );
+			if ( field ) { url.searchParams.set( 'bolt_edit_field', field ); }
+			if ( hint && hint.text ) { url.searchParams.set( 'bolt_edit_hint', hint.text ); }
+			if ( hint && hint.image ) { url.searchParams.set( 'bolt_edit_img', hint.image ); }
+			return url.href;
+		} catch ( e ) { return ''; }
+	};
+
+	const reloadKeepingPosition = () => {
+		try {
+			window.sessionStorage.setItem( restoreKey, JSON.stringify( { url: window.location.href, y: window.scrollY, active } ) );
+		} catch ( e ) { /* A plain reload still works. */ }
+		window.location.reload();
+	};
+
+	const refreshAfterEdit = async () => {
+		window.clearTimeout( statusTimer );
+		status.textContent = labels.updating;
+		status.hidden = false;
+
+		// Themes that build or reveal content with their own scripts (sliders, masonry, scroll animations)
+		// do not start those scripts inside a swapped region. A reload is the safe default, and a theme can
+		// opt in to swapping with the bolt_edit_region_swap filter.
+		if ( ! window.boltEditEditor.regionSwap ) {
+			reloadKeepingPosition();
+			return;
+		}
+
+		try {
+			// A changing query string also skips page caches.
+			const url = new URL( window.location.href );
+			url.searchParams.set( 'bolt-edit-refresh', String( Date.now() ) );
+			const response = await window.fetch( url.href, { credentials: 'same-origin', cache: 'no-store' } );
+			if ( ! response.ok ) { throw new Error( 'Request failed' ); }
+			const fresh = Array.from( new DOMParser().parseFromString( await response.text(), 'text/html' ).querySelectorAll( '[data-bolt-edit-managed]' ) );
+			const current = Array.from( document.querySelectorAll( '[data-bolt-edit-managed]' ) );
+			// Only swap when the new page has the same regions in the same order.
+			if ( fresh.length !== current.length || current.some( ( element, index ) => element.dataset.boltEditManagedEditUrl !== fresh[ index ].dataset.boltEditManagedEditUrl ) ) {
+				throw new Error( 'Regions changed' );
+			}
+			// The popup can lead to other posts, so every changed region is swapped.
+			current.forEach( ( element, index ) => {
+				if ( element.outerHTML === fresh[ index ].outerHTML ) { return; }
+				const replacement = document.importNode( fresh[ index ], true );
+				element.replaceWith( replacement );
+				// Lets a theme start up sliders or animations inside the new markup again.
+				replacement.dispatchEvent( new CustomEvent( 'bolt-edit:region-updated', { bubbles: true, detail: { region: replacement } } ) );
+			} );
+			renderMarkers();
+			showSaved();
+		} catch ( refreshError ) {
+			reloadKeepingPosition();
+		}
+	};
+	const closeModal = () => {
+		if ( ! editModal || editModal.root.hidden ) { return; }
+		if ( modalDirty && ! window.confirm( labels.discardChanges ) ) { return; }
+
+		const saved = modalSaved;
+		const trigger = modalTrigger;
+
+		editModal.root.hidden = true;
+		editModal.frame.src = 'about:blank';
+		document.documentElement.classList.remove( 'bolt-edit-modal-open' );
+		modalSaved = false;
+		modalDirty = false;
+		modalTrigger = null;
+
+		if ( saved ) {
+			refreshAfterEdit();
+		} else if ( trigger && document.contains( trigger ) ) {
+			trigger.focus( { preventScroll: true } );
+		}
+	};
+
+	// Save shows only while the frame has unsaved changes.
+	const updateModalActions = () => {
+		if ( editModal ) { editModal.save.hidden = ! modalDirty; }
+	};
+	const buildModal = () => {
+		const root = document.createElement( 'div' );
+		root.className = 'bolt-edit-ui bolt-edit-modal';
+		root.hidden = true;
+		root.innerHTML = '<div class="bolt-edit-modal__backdrop"></div><div class="bolt-edit-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="bolt-edit-modal-title"><div class="bolt-edit-modal__header"><div class="bolt-edit-modal__title" id="bolt-edit-modal-title" role="heading" aria-level="2"></div><div class="bolt-edit-modal__actions"><a class="bolt-edit-modal__admin" hidden></a><button class="bolt-edit-modal__save" type="button" hidden></button><button class="bolt-edit-modal__close" type="button"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div></div><div class="bolt-edit-modal__body"><p class="bolt-edit-modal__loading" role="status"></p><iframe class="bolt-edit-modal__frame"></iframe></div></div>';
+		document.body.append( root );
+
+		const modal = {
+			root,
+			title: root.querySelector( '.bolt-edit-modal__title' ),
+			close: root.querySelector( '.bolt-edit-modal__close' ),
+			admin: root.querySelector( '.bolt-edit-modal__admin' ),
+			save: root.querySelector( '.bolt-edit-modal__save' ),
+			loading: root.querySelector( '.bolt-edit-modal__loading' ),
+			frame: root.querySelector( '.bolt-edit-modal__frame' ),
+		};
+
+		modal.close.addEventListener( 'click', closeModal );
+		modal.save.addEventListener( 'click', () => {
+			modal.frame.contentWindow.postMessage( { source: 'bolt-edit', type: 'save' }, window.location.origin );
+		} );
+		root.querySelector( '.bolt-edit-modal__backdrop' ).addEventListener( 'click', closeModal );
+		modal.frame.addEventListener( 'load', () => {
+			// WordPress answers a screen the visitor may not open with its plain error page. Say so in our own words.
+			try {
+				const frameBody = modal.frame.contentDocument && modal.frame.contentDocument.body;
+				if ( frameBody && 'error-page' === frameBody.id && popupNoAccess ) {
+					window.clearTimeout( modalLoadTimer );
+					modal.frame.hidden = true;
+					modal.save.hidden = true;
+					modal.loading.textContent = popupNoAccess.textContent.trim();
+					modal.loading.hidden = false;
+					return;
+				}
+			} catch ( e ) { /* A frame we cannot read is treated as a normal editor. */ }
+			modalDirty = false;
+			updateModalActions();
+			if ( ! modalSaving ) { modal.loading.hidden = true; return; }
+			window.setTimeout( () => {
+				if ( ! modalSaving ) { return; }
+				modalSaving = false;
+				modal.loading.hidden = true;
+			}, 800 );
+		} );
+
+		editModal = modal;
+		return modal;
+	};
+
+	// If the popup never reports in, fall back to opening the editor like a normal link.
+	let modalLoadTimer = 0;
+	let modalContextSeen = false;
+
+	const openEditModal = ( href, region, trigger, customTitle, field ) => {
+		const url = frameUrl( href, field, field ? null : regionHint( region ) );
+		if ( ! url ) { return false; }
+
+		const modal = editModal || buildModal();
+		const title = customTitle || labels.editContent;
+
+		closePopup();
+		highlight.hidden = true;
+		modalTrigger = trigger;
+		// The full post in the dashboard is always one click away.
+		modal.admin.textContent = labels.openAdmin;
+		modal.admin.href = clientEditUrl( href ) || href;
+		modal.admin.hidden = false;
+		modalSaved = false;
+		modalDirty = false;
+		modal.title.textContent = title;
+		modal.frame.title = title;
+		modal.close.setAttribute( 'aria-label', labels.closeEditor );
+		modal.close.title = labels.closeEditor;
+		modal.save.textContent = labels.save;
+		modal.save.hidden = true;
+		modal.loading.textContent = labels.loadingEditor;
+		modal.loading.hidden = false;
+		modalContextSeen = false;
+		window.clearTimeout( modalLoadTimer );
+		modalLoadTimer = window.setTimeout( () => {
+			if ( modalContextSeen || ! editModal || editModal.root.hidden ) { return; }
+			closeModal();
+			window.location.href = href;
+		}, 15000 );
+		modal.frame.hidden = false;
+		modal.frame.src = url;
+		modal.root.hidden = false;
+		document.documentElement.classList.add( 'bolt-edit-modal-open' );
+		modal.close.focus();
+		return true;
+	};
+
+	// Client buttons: remember this page, so the admin can lead back to it.
+	const dashboardLink = document.querySelector( '#wp-admin-bar-bolt-edit-switch > a' );
+	if ( dashboardLink ) {
+		dashboardLink.addEventListener( 'click', () => {
+			try {
+				window.sessionStorage.setItem( 'bolt-edit-client-return', window.location.href.split( '#' )[ 0 ] );
+			} catch ( e ) { /* The dashboard still opens without it. */ }
+		} );
+	}
+
+	// The frame reports saves and unsaved changes with postMessage.
+	window.addEventListener( 'message', ( event ) => {
+		const data = event.data;
+
+		if ( ! editModal || editModal.root.hidden || event.origin !== window.location.origin || event.source !== editModal.frame.contentWindow || ! data || 'bolt-edit' !== data.source ) { return; }
+
+		if ( 'saved' === data.type ) {
+			modalSaved = true;
+			modalDirty = false;
+			modalSaving = false;
+			// Done: close and show the result on the page.
+			closeModal();
+			return;
+		} else if ( 'saving' === data.type ) {
+			modalSaving = true;
+			editModal.loading.textContent = labels.updating;
+			editModal.loading.hidden = false;
+		} else if ( 'invalid' === data.type ) {
+			modalSaving = false;
+			editModal.loading.hidden = true;
+		} else if ( 'dirty' === data.type ) {
+			modalDirty = Boolean( data.value );
+		} else if ( 'context' === data.type ) {
+			modalContextSeen = true;
+			window.clearTimeout( modalLoadTimer );
+		}
+
+		updateModalActions();
+	} );
 	const selectableTarget = ( element ) => {
 		if ( ! ( element instanceof Element ) || element.closest( '.bolt-edit-ui, #wpadminbar, .media-modal, .media-modal-backdrop, script, style, iframe' ) ) { return null; }
 		return element.closest( '[data-bolt-edit-field]' ) || element.closest( '[data-bolt-edit-managed]' ) || element;
@@ -636,6 +880,7 @@
 
 	const setPopupMode = ( mode ) => {
 		popupMode = mode;
+		popup.classList.remove( 'bolt-edit-popup--detail' );
 		error.hidden = true;
 		modeButtons.forEach( button => button.setAttribute( 'aria-selected', String( button.dataset.boltEditMode === mode ) ) );
 		Object.values( editors ).forEach( editor => { editor.hidden = true; } );
@@ -650,13 +895,18 @@
 			if ( type === 'richtext' ) { focusEditor(); } else if ( type === 'image' ) { replaceImage.focus(); } else if ( type === 'button' ) { buttonText.focus(); } else { input.focus(); } }
 		else {
 			managedEditor.hidden = false;
-			popup.querySelector( '[data-bolt-edit-managed-description]' ).textContent = selectedField?.dataset.boltEditManagedLabel || '';
-			const url = clientEditUrl( selectedField?.dataset.boltEditManagedEditUrl || '' );
+			const editUrl = selectedField?.dataset.boltEditManagedEditUrl || '';
+			const url = clientEditUrl( editUrl );
 			popupManagedLink.hidden = ! url;
+			if ( popupNoAccess ) { popupNoAccess.hidden = Boolean( url ); }
 			popupManagedLink.href = url || '#';
-			popupManagedLink.textContent = selectedField?.dataset.boltEditManagedActionLabel || labels.edit;
+			popupManagedLink.dataset.boltEditOpen = 'modal';
+			if ( popupManagedText ) { popupManagedText.textContent = labels.editManaged; }
 			save.hidden = true;
-			if ( url ) { popupManagedLink.focus(); }
+			if ( popupEditing && editUrl && isImageRegion( selectedField ) ) {
+				const region = selectedField;
+				if ( openEditModal( editUrl, region, region, '', region.dataset.boltEditManagedField || '' ) ) { return; }
+			}
 		}
 		if ( selectedField ) { positionPopup( selectedField ); }
 	};
@@ -683,6 +933,105 @@
 		finally { save.disabled = false; cancel.disabled = false; modeButtons.forEach( button => { button.disabled = false; } ); }
 	};
 
+	const commentEditForm = popup.querySelector( '[data-bolt-edit-comment-edit-form]' );
+	const commentEditInput = popup.querySelector( '[data-bolt-edit-comment-edit-input]' );
+	const commentEditButton = popup.querySelector( '[data-bolt-edit-comment-edit]' );
+	const commentEditSave = popup.querySelector( '[data-bolt-edit-comment-edit-save]' );
+	const commentDeleteButton = popup.querySelector( '[data-bolt-edit-comment-delete]' );
+	let deleteTimer = 0;
+	let openedComment = null;
+
+	const commentDate = ( value ) => {
+		const date = new Date( String( value ).replace( ' ', 'T' ) + 'Z' );
+		return isNaN( date.getTime() ) ? null : date;
+	};
+
+	// The comment as it is read: who, status and date, the text, and for your own comments an Edit link.
+	const renderCommentDetail = ( comment ) => {
+		openedComment = comment;
+		const name = String( comment.author || '' );
+		const parts = name.trim().split( /\s+/ );
+		popup.querySelector( '[data-bolt-edit-comment-avatar]' ).textContent = ( ( parts[ 0 ] || '' ).charAt( 0 ) + ( parts.length > 1 ? parts[ parts.length - 1 ].charAt( 0 ) : '' ) ).toUpperCase();
+		popup.querySelector( '[data-bolt-edit-comment-author]' ).textContent = name;
+		const meta = popup.querySelector( '[data-bolt-edit-comment-meta]' );
+		meta.textContent = '';
+		const created = commentDate( comment.created_at );
+		meta.append( ( comment.resolved ? ( labels.statusResolved || 'Resolved' ) : ( labels.statusOpen || 'Open' ) ) + ( created ? ' · ' + created.toLocaleDateString( undefined, { day: 'numeric', month: 'short', year: 'numeric' } ) : '' ) );
+		if ( comment.edited_at ) {
+			const edited = document.createElement( 'span' );
+			const when = commentDate( comment.edited_at );
+			edited.className = 'bolt-edit-popup__edited';
+			edited.textContent = labels.editedLabel || 'edited';
+			if ( when ) { edited.title = when.toLocaleString(); }
+			meta.append( ' · ', edited );
+		}
+		const body = popup.querySelector( '[data-bolt-edit-comment-body]' );
+		body.textContent = comment.comment;
+		body.hidden = false;
+		commentEditForm.hidden = true;
+		commentEditButton.hidden = ! comment.mine;
+	};
+
+	const startCommentEdit = () => {
+		if ( ! openedComment || ! openedComment.mine ) { return; }
+		commentEditInput.value = openedComment.comment;
+		if ( 'function' === typeof resetDeleteButton ) { resetDeleteButton(); }
+		popup.querySelector( '[data-bolt-edit-comment-body]' ).hidden = true;
+		commentEditButton.hidden = true;
+		commentEditForm.hidden = false;
+		error.hidden = true;
+		commentEditInput.focus();
+		if ( selectedField ) { positionPopup( selectedField ); }
+	};
+
+	const saveCommentEdit = async () => {
+		if ( ! openedComment ) { return; }
+		const text = commentEditInput.value.trim();
+		if ( ! text ) { showError( labels.writeComment ); commentEditInput.focus(); return; }
+		if ( text === openedComment.comment ) { renderCommentDetail( openedComment ); if ( selectedField ) { positionPopup( selectedField ); } return; }
+		commentEditSave.disabled = true;
+		try {
+			const updated = await commentRequest( `${ window.boltEditEditor.commentsUrl }/${ openedComment.id }/text`, { method: 'PATCH', body: JSON.stringify( { comment: text } ) } );
+			const at = comments.findIndex( item => item.id === updated.id );
+			if ( at > -1 ) { comments[ at ] = updated; }
+			renderCommentDetail( updated );
+			showSaved( labels.commentEdited || labels.commentSaved );
+			if ( selectedField ) { positionPopup( selectedField ); }
+		} catch ( e ) { showError( e.message ); }
+		finally { commentEditSave.disabled = false; }
+	};
+
+	commentEditButton.addEventListener( 'click', startCommentEdit );
+	commentEditSave.addEventListener( 'click', saveCommentEdit );
+	const resetDeleteButton = () => {
+		window.clearTimeout( deleteTimer );
+		commentDeleteButton.textContent = labels.deleteLabel || 'Delete';
+		commentDeleteButton.dataset.sure = '';
+	};
+
+	const deleteOwnComment = async () => {
+		if ( ! openedComment || ! openedComment.mine ) { return; }
+		if ( ! commentDeleteButton.dataset.sure ) {
+			commentDeleteButton.dataset.sure = '1';
+			commentDeleteButton.textContent = labels.deleteSure || 'Click again to delete';
+			deleteTimer = window.setTimeout( resetDeleteButton, 4000 );
+			return;
+		}
+		resetDeleteButton();
+		commentDeleteButton.disabled = true;
+		try {
+			const gone = openedComment.id;
+			await commentRequest( `${ window.boltEditEditor.commentsUrl }/${ gone }/own`, { method: 'DELETE' } );
+			comments = comments.filter( item => item.id !== gone );
+			closePopup();
+			renderMarkers();
+			showSaved( labels.commentDeleted );
+		} catch ( e ) { showError( e.message ); }
+		finally { commentDeleteButton.disabled = false; }
+	};
+
+	commentDeleteButton.addEventListener( 'click', deleteOwnComment );
+
 	const openComment = ( comment ) => {
 		const target = resolveTarget( comment.target );
 		if ( target ) { target.scrollIntoView( { block: 'center', behavior: 'instant' } ); }
@@ -692,8 +1041,8 @@
 		popupLabel.textContent = comment.target.label;
 		Object.values( editors ).forEach( editor => { editor.hidden = true; } );
 		commentEditor.hidden = true; managedEditor.hidden = true; commentDetail.hidden = false;
-		popup.querySelector( '[data-bolt-edit-comment-author]' ).textContent = `${ comment.author } · ${ comment.resolved ? labels.commentResolved : labels.commentOpen }`;
-		popup.querySelector( '[data-bolt-edit-comment-body]' ).textContent = comment.comment;
+		renderCommentDetail( comment );
+		popup.classList.add( 'bolt-edit-popup--detail' );
 		modeButtons.forEach( button => { button.hidden = true; } );
 		save.hidden = true; error.hidden = Boolean( target );
 		error.textContent = target ? '' : labels.locationMissing;
@@ -704,14 +1053,13 @@
 
 	const renderMarkers = () => {
 		markerLayer.replaceChildren();
-		if ( ! active ) { return; }
 		comments.filter( comment => ! comment.resolved ).forEach( comment => {
 			const target = resolveTarget( comment.target ); if ( ! target ) { return; }
 			const rect = target.getBoundingClientRect();
 			if ( ! rect.width || ! rect.height ) { return; }
 			const x = rect.left + rect.width * comment.target.x; const y = rect.top + rect.height * comment.target.y;
 			if ( y < 0 || y > window.innerHeight || x < 0 || x > window.innerWidth ) { return; }
-			const marker = document.createElement( 'button' ); marker.type = 'button'; marker.className = 'bolt-edit-comment-marker'; marker.textContent = String( comment.id ); marker.setAttribute( 'aria-label', `${ comment.target.label }: ${ comment.comment.slice( 0, 80 ) }` ); marker.style.left = `${ x }px`; marker.style.top = `${ y }px`;
+			const marker = document.createElement( 'button' ); marker.type = 'button'; marker.className = comment.mine ? 'bolt-edit-comment-marker' : 'bolt-edit-comment-marker bolt-edit-comment-marker--other'; marker.textContent = String( comment.id ); marker.setAttribute( 'aria-label', `${ comment.target.label }: ${ comment.comment.slice( 0, 80 ) }` ); marker.style.left = `${ x }px`; marker.style.top = `${ y }px`;
 			marker.addEventListener( 'click', () => { if ( ! save.disabled ) { closePopup(); openComment( comment ); } } );markerLayer.append( marker );
 		} );
 	};
@@ -801,6 +1149,16 @@
 	} );
 
 	cancel.addEventListener( 'click', closePopup );
+
+	// Managed content opens in a popup. Modified clicks and other sites keep the normal link.
+	[ popupManagedLink ].forEach( ( link ) => {
+		link.addEventListener( 'click', ( event ) => {
+			if ( ! popupEditing || event.defaultPrevented || 0 !== event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ) { return; }
+			const region = selectedField;
+			if ( ! region || ! region.hasAttribute( 'data-bolt-edit-managed' ) || 'admin' === link.dataset.boltEditOpen ) { return; }
+			if ( openEditModal( link.href, region, link, '', region.dataset.boltEditManagedField || '' ) ) { event.preventDefault(); }
+		} );
+	} );
 
 	tools.forEach( ( tool ) => {
 		// Keep the text selection in the editor when a tool is clicked.
@@ -936,7 +1294,23 @@
 		}
 	} );
 
+	// Escape closes an open popup first, wherever the focus is on the page. A second Escape then leaves edit mode.
+	window.addEventListener( 'keydown', ( event ) => {
+		if ( 'Escape' !== event.key || event.defaultPrevented || event.isComposing || popup.hidden || save.disabled ) { return; }
+		if ( editModal && ! editModal.root.hidden ) { return; }
+		if ( ! linkRow.hidden ) { return; }
+		if ( document.querySelector( '.media-modal:not([style*="display: none"])' ) ) { return; }
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		closePopup();
+	}, true );
+
 	document.addEventListener( 'keydown', ( event ) => {
+		if ( 'Escape' === event.key && editModal && ! editModal.root.hidden ) {
+			closeModal();
+			return;
+		}
+
 		if ( 'Escape' !== event.key || save.disabled ) {
 			return;
 		}
@@ -978,6 +1352,17 @@
 		},
 		true
 	);
+
+	try {
+		const restored = JSON.parse( window.sessionStorage.getItem( restoreKey ) || 'null' );
+		window.sessionStorage.removeItem( restoreKey );
+		if ( restored && restored.url === window.location.href ) {
+			const scrollBack = () => window.scrollTo( 0, Number( restored.y ) || 0 );
+			scrollBack();
+			window.addEventListener( 'load', scrollBack, { once: true } );
+			if ( restored.active ) { setActive( true ); }
+		}
+	} catch ( e ) { /* Nothing to restore. */ }
 
 	const requestParams = new URLSearchParams( window.location.search );
 
