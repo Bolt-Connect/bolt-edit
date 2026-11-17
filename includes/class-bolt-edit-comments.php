@@ -261,6 +261,10 @@ final class Bolt_Edit_Comments {
 	public static function inbox( $resolved = false, $page = 1 ) {
 		global $wpdb;
 		$offset = ( max( 1, absint( $page ) ) - 1 ) * 50;
+		if ( null === $resolved ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Paginated private inbox reads every status.
+			return $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %i ORDER BY comment_id DESC LIMIT 51 OFFSET %d', self::table_name(), $offset ) );
+		}
 		if ( $resolved ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Paginated private inbox reads current status.
 			return $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %i WHERE resolved_at IS NOT NULL ORDER BY comment_id DESC LIMIT 51 OFFSET %d', self::table_name(), $offset ) );

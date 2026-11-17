@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bolt Edit
  * Description: Frontend content editing for AI-built WordPress themes. The theme owns the design, your client edits the words and images.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Plugin URI: https://boltconnect.nl
  * Update URI: https://github.com/Bolt-Connect/bolt-edit/
  * Author: Bolt Connect
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'BOLT_EDIT_VERSION', '1.1.0' );
+define( 'BOLT_EDIT_VERSION', '1.2.0' );
 define( 'BOLT_EDIT_PLUGIN_FILE', __FILE__ );
 define( 'BOLT_EDIT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BOLT_EDIT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

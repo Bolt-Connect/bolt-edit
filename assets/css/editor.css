@@ -173,7 +173,7 @@ html.bolt-edit-media-open .media-modal .media-frame {
 
 .bolt-edit-highlight--indirect { border-color: var(--bolt-edit-muted); }
 
-/* Keep the pencil over page content, including layout containers and field children. */
+/* Keep the edit icon over page content, including layout containers and field children. */
 html.bolt-edit-selection-active:not(.bolt-edit-media-open) body,
 html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar)),
 html.bolt-edit-selection-active:not(.bolt-edit-media-open) body > :not(:where(.bolt-edit-ui, #wpadminbar)) *,

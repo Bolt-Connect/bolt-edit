@@ -66,7 +66,7 @@ Do not finish a theme by adding Bolt Edit to only the most important headings or
 
 ## Bolt Edit v2 client workflow
 
-Focus mode and private comments do not require new theme integration. Keep the existing managed-region links pointed at the real WordPress, ACF, or WooCommerce editor. Static Pages stay editable through the pencil. Clients keep their normal WordPress role (Editor for pages and posts, Shop manager for WooCommerce products), and Focus mode only gives them a simpler top bar and a start on the website.
+Focus mode and private comments do not require new theme integration. Keep the existing managed-region links pointed at the real WordPress, ACF, or WooCommerce editor. Static Pages stay editable on the frontend. Clients keep their normal WordPress role (Editor for pages and posts, Shop manager for WooCommerce products), and Focus mode only gives them a simpler top bar and a start on the website.
 
 Comments are private feedback owned by Bolt Edit, separate from public WordPress comments and saved text changes. They can attach to any visible element. Prefer stable element IDs where available so feedback markers can find the same section after layout changes; this is optional, not a compatibility requirement.
 
@@ -80,28 +80,34 @@ The reveal rule lives in the plugin. Do not add reveal CSS to the theme. A theme
 
 ## Required safe theme integration
 
-The website must keep rendering its initial content if Bolt Edit is temporarily unavailable or deactivated. Never let a missing plugin function cause a fatal error on the public site.
+The website must keep rendering its content if Bolt Edit is temporarily unavailable or deactivated, including the texts clients edited. Never let a missing plugin function cause a fatal error on the public site.
 
 - Put theme-prefixed wrapper functions in `functions.php` for text, rich text, buttons, images, and managed regions.
 - Inside each wrapper, call the matching Bolt Edit helper only when `function_exists()` confirms that it is available.
-- Otherwise render the supplied default value with the correct escaping and the same theme-controlled classes and surrounding layout.
+- Otherwise render the client's saved value, read straight from the `bolt_edit_values` option by field ID, and fall back to the supplied default only when there is no saved value. Use the correct escaping and the same theme-controlled classes and surrounding layout. Saved text and rich text values are strings, button values are arrays with `text` and `url`, and image values are attachment IDs.
 - Do not redeclare functions whose names begin with `bolt_edit_`; those belong to the plugin.
-- After building, temporarily deactivate Bolt Edit and verify that every public page still loads without PHP errors. Then reactivate Bolt Edit and verify editing.
+- After building, temporarily deactivate Bolt Edit and verify that every public page still loads without PHP errors and still shows the edited texts. Then reactivate Bolt Edit and verify editing.
 
 Minimal text-wrapper pattern:
 
 ```php
+function project_saved_value( $id, $default ) {
+    $values = get_option( 'bolt_edit_values', array() );
+
+    return is_array( $values ) && array_key_exists( $id, $values ) ? $values[ $id ] : $default;
+}
+
 function project_text( $id, $args = array() ) {
     if ( function_exists( 'bolt_edit_text' ) ) {
         bolt_edit_text( $id, $args );
         return;
     }
 
-    echo esc_html( isset( $args['default'] ) ? $args['default'] : '' );
+    echo esc_html( project_saved_value( $id, isset( $args['default'] ) ? $args['default'] : '' ) );
 }
 ```
 
-Use a prefix derived from the real theme slug instead of `project_`, and apply the same pattern to the other Bolt Edit field types. The fallback exists for resilience; Bolt Edit remains a required plugin for frontend editing.
+Use a prefix derived from the real theme slug instead of `project_`, and apply the same pattern to the other Bolt Edit field types. The fallback keeps the site showing the client's edits while Bolt Edit is off; only editing stops. Bolt Edit remains a required plugin for frontend editing.
 
 ## Content continuity
 
@@ -378,6 +384,8 @@ For every new static client-facing image:
 9. Remove the temporary source file from the theme project after the Media Library import is confirmed.
 
 Do not use `get_stylesheet_directory_uri()`, theme-relative image paths, or hard-coded CSS `url(...)` values for static client-facing images. For a hero or other visual background, render the Bolt Edit image as a positioned `<img>` and use theme CSS such as `object-fit` and `object-position` to preserve the design.
+
+When theme code shows any Media Library image, also outside `bolt_edit_image()`, load it by its attachment ID (for example with `wp_get_attachment_image()`), never by writing its file URL into a template or CSS file. File names can change, for example when an image plugin converts a JPG to WebP, and a hard-coded URL then breaks.
 
 This rule applies to editable content imagery such as hero photos, team portraits, project images, product-style visuals, and meaningful illustrations. Structural design assets such as interface icons, decorative textures, masks, cursors, and non-content SVG ornaments may remain in the theme when clients are not expected to replace them. A client-editable logo or brand image belongs in the Media Library; a purely structural icon belongs to the theme.
 

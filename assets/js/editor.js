@@ -70,8 +70,8 @@
 	let lastRange = null;
 	let linkRange = null;
 	const labels = {
-		openPencil: 'Edit',
-		closePencil: 'Done',
+		openLabel: 'Edit',
+		closeLabel: 'Done',
 		saved: 'Saved',
 		error: 'Something went wrong. Please try again.',
 		chooseImage: 'Choose image',
@@ -445,7 +445,7 @@
 		active = nextActive;
 		document.documentElement.classList.toggle( 'bolt-edit-selection-active', active );
 		toggle.setAttribute( 'aria-pressed', active ? 'true' : 'false' );
-		( toggle.querySelector( '[data-bolt-edit-toggle-label]' ) || toggle ).textContent = active ? labels.closePencil : labels.openPencil;
+		( toggle.querySelector( '[data-bolt-edit-toggle-label]' ) || toggle ).textContent = active ? labels.closeLabel : labels.openLabel;
 
 		fields.forEach( ( field ) => {
 			field.tabIndex = active ? 0 : -1;

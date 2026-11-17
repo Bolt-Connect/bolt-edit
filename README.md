@@ -49,6 +49,10 @@ The full instructions for coding agents are in [`docs/agent-instructions.md`](do
 - `bolt_edit_managed_region_open()` and `bolt_edit_managed_region_close()`
 
 
+## Version 1.2.0
+
+Translation support (Polylang/WPML): Bolt Edit stays off on translated pages and lists its texts for translation. New `bolt_edit_saved` action for cache clearing. AI agents can page and filter the change log, list all comments and see when a template page list is cut off. Themes now keep showing client edits when Bolt Edit is off.
+
 ## Version 1.1.0
 
 AI instructions per topic, a clean-up prompt, Dev mode, a Templates tab, Access per role, an SEO box and a How to use page. Content from other plugins opens in a popup. The Clients role is replaced by Focus mode (existing Clients become Editors with Focus mode). Visitors never load Bolt Edit.

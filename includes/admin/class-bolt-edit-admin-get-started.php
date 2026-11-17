@@ -11,7 +11,7 @@ final class Bolt_Edit_Admin_Get_Started {
 	/**
 	 * Small website picture used by the For clients walkthrough.
 	 *
-	 * @param bool $edit Whether the headline shows the blue edit outline and pencil cursor.
+	 * @param bool $edit Whether the headline shows the blue edit outline and edit cursor.
 	 * @return void
 	 */
 	private static function render_guide_site( $edit ) {
@@ -133,7 +133,7 @@ final class Bolt_Edit_Admin_Get_Started {
 						<div class="bolt-edit-get-started__intro bolt-edit-guide__intro">
 							<span class="bolt-edit-eyebrow"><?php esc_html_e( 'The problem', 'bolt-edit' ); ?></span>
 							<h2><?php esc_html_e( 'Clients want simple page editing', 'bolt-edit' ); ?></h2>
-							<p class="bolt-edit-guide__problem"><?php esc_html_e( 'Clients are often overwhelmed when they log in to the WordPress dashboard. Bolt Edit changes that with a super easy front-end editing experience, so they only go to the dashboard when they really need to. It is the easiest way to let clients make changes to an AI-generated WordPress theme: click the pencil, edit, save. It also works with dynamic plugins through a popup, and you as the developer keep full control over how the theme is built.', 'bolt-edit' ); ?></p>
+							<p class="bolt-edit-guide__problem"><?php esc_html_e( 'Clients are often overwhelmed when they log in to the WordPress dashboard. Bolt Edit changes that with a super easy front-end editing experience, so they only go to the dashboard when they really need to. It is the easiest way to let clients make changes to an AI-generated WordPress theme: click, edit, save. It also works with dynamic plugins through a popup, and you as the developer keep full control over how the theme is built.', 'bolt-edit' ); ?></p>
 						</div>
 
 						<div class="bolt-edit-guide__steps">
@@ -147,7 +147,7 @@ final class Bolt_Edit_Admin_Get_Started {
 							</div>
 
 							<div class="bolt-edit-guide__row">
-								<div><span class="bolt-edit-guide__n">2</span><h3><?php esc_html_e( 'They point at text and click', 'bolt-edit' ); ?></h3><p><?php esc_html_e( 'Anything they can change gets a blue outline and a pencil cursor. A click opens it in a popup.', 'bolt-edit' ); ?></p></div>
+								<div><span class="bolt-edit-guide__n">2</span><h3><?php esc_html_e( 'They point at text and click', 'bolt-edit' ); ?></h3><p><?php esc_html_e( 'Anything they can change gets a blue outline and an edit cursor. A click opens it in a popup.', 'bolt-edit' ); ?></p></div>
 								<div class="bolt-edit-guide__vis" aria-hidden="true"><?php self::render_guide_site( true ); ?></div>
 							</div>
 

@@ -4,7 +4,7 @@ Tags: frontend editing, ai, custom theme, content editing, client editing
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,15 @@ Yes. Each field has a stable ID, and a saved value always wins over the theme's 
 Bolt Edit updates through GitHub releases and shows up in the normal WordPress plugin updates. Use **Bolt Edit → Features → Plugin updates → Check for updates** to check right away. Updates keep your content, comments and settings.
 
 == Changelog ==
+
+= 1.2.0 =
+* New: translation plugins that read wpml-config.xml (such as Polylang and WPML) list the Bolt Edit texts for translation.
+* Changed: on a translated page (not the default language) Bolt Edit stays off, so saving can no longer overwrite the original text. Translate in the translation plugin. The filter bolt_edit_is_default_language changes this.
+* New: the bolt_edit_saved action fires after every saved field (field ID and value), so a site can clear its page cache.
+* New: the list-changes ability for AI agents can page back through the whole activity log and filter by field, user, page and date.
+* New: the list-comments ability can return open, resolved or all comments.
+* Changed: the list-templates ability lists 20 pages per template by default and tells agents when the list is cut off.
+* Changed: the agent instructions now tell themes to show saved Bolt Edit texts straight from the database when Bolt Edit is off, and to load Media Library images by their ID.
 
 = 1.1.0 =
 * New: AI instructions tab with default rules per topic and your own additions. Agents read them with the bolt-edit/get-instructions ability.

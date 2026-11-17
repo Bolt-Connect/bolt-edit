@@ -450,7 +450,7 @@ html.bolt-edit-dev-active .bolt-edit-toolbar__dev .dashicons {
 	border-radius: 50%;
 	vertical-align: -1px;
 }
-/* Class chip: click the name to copy, pencil to edit */
+/* Class chip: click the name to copy, edit icon to edit */
 .bolt-edit-dev-chip--split .bolt-edit-dev-chip-name {
 	appearance: none;
 	margin: 0;

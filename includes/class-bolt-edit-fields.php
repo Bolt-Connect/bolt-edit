@@ -149,6 +149,14 @@ final class Bolt_Edit_Fields {
 			self::unlock_values();
 		}
 
+		/**
+		 * Fires after a Bolt Edit field is saved, so a site can clear its page cache.
+		 *
+		 * @param string $id    Stable field ID.
+		 * @param mixed  $value Saved value.
+		 */
+		do_action( 'bolt_edit_saved', $id, $value );
+
 		return $value;
 	}
 
